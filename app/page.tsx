@@ -35,12 +35,19 @@ const Home = () => {
 		<section className='flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
 			{gameData.gameStatus === 'Final' && (
 				<div className='max-w-[55rem] w-full mx-auto text-center'>
-					<h1 className='text-[13cqw] md:text-[10cqw] lg:text-[7cqw] text-[#e16f1f]'>
+					<h1
+						className={`text-[13cqw] md:text-[10cqw] lg:text-[7cqw] text-[#e16f1f] ${
+							weHookedThem ? 'text-[#e16f1f]' : 'text-red-500'
+						}`}>
 						{weHookedThem ? 'Hooked Them' : 'Did Not Hook Them'}
 					</h1>
 					{weHookedThem && (
 						<div className='md:-mt-[5rem] md:-mb-[4rem]'>
-							<img src='/images/horns.png' alt='Texas Longhorns Logo' />
+							<img
+								src='/images/horns.png'
+								alt='Texas Longhorns Logo'
+								className={weHookedThem ? 'rotate-0' : 'rotate-180'}
+							/>
 						</div>
 					)}
 					<GameStats
