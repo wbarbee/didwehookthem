@@ -27,25 +27,19 @@ const Home = () => {
 
 	console.log(data);
 
-	const gameData = {
-		gameStatus: data.status.type.shortDetail,
-		homeTeam: data.competitions[0].competitors[0].team.displayName,
-		homeTeamScore: parseInt(data.competitions[0].competitors[0].score, 10),
-		awayTeam: data.competitions[0].competitors[1].team.displayName,
-		awayTeamScore: parseInt(data.competitions[0].competitors[1].score, 10),
-		venueCity: `${data.competitions[0].venue.address.city}, ${data.competitions[0].venue.address.state}`,
-		venueStadium: data.competitions[0].venue.fullName,
-	};
-
 	const weHookedThem =
-		(gameData.homeTeam === 'Texas Longhorns' &&
-			gameData.homeTeamScore > gameData.awayTeamScore) ||
-		(gameData.awayTeam === 'Texas Longhorns' &&
-			gameData.awayTeamScore > gameData.homeTeamScore);
+		(data.homeTeam === 'Texas Longhorns' &&
+			data.homeTeamScore &&
+			data.awayTeamScore &&
+			parseInt(data.homeTeamScore, 10) > parseInt(data.awayTeamScore, 10)) ||
+		(data.awayTeam === 'Texas Longhorns' &&
+			data.awayTeamScore &&
+			data.homeTeamScore &&
+			parseInt(data.awayTeamScore, 10) > parseInt(data.homeTeamScore, 10));
 
 	return (
 		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[40rem]'>
-			{gameData.gameStatus === 'Final' && (
+			{data.gameStatus === 'Final' && (
 				<div className='max-w-[55rem] w-full mx-auto text-center  pt-5 pb-8'>
 					<h1
 						className={`text-[13cqw] md:text-[10cqw] lg:text-[8cqw] xl:text-[7cqw] text-[#e16f1f] ${
@@ -61,17 +55,17 @@ const Home = () => {
 						/>
 					</div>
 					<GameStats
-						homeTeam={gameData.homeTeam}
-						homeTeamScore={gameData.homeTeamScore}
-						awayTeam={gameData.awayTeam}
-						awayTeamScore={gameData.awayTeamScore}
+						homeTeam={data.homeTeam ?? ''}
+						homeTeamScore={data.homeTeamScore ?? ''}
+						awayTeam={data.awayTeam ?? ''}
+						awayTeamScore={data.awayTeamScore ?? ''}
 						weHookedThem={weHookedThem}
-						venueCity={gameData.venueCity}
-						venueStadium={gameData.venueStadium}
+						venueCity={data.venueCity ?? ''}
+						venueStadium={data.venueStadium ?? ''}
 					/>
 				</div>
 			)}
-			{gameData.gameStatus !== 'Final' && (
+			{data.gameStatus !== 'Final' && (
 				<div className='max-w-[55rem] w-full mx-auto text-center'>
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-[#e16f1f]'>
 						Currently trying to hook...

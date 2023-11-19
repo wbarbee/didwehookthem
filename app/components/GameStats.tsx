@@ -1,8 +1,8 @@
 interface GameStatsProps {
 	homeTeam: string;
-	homeTeamScore: number;
+	homeTeamScore: string;
 	awayTeam: string;
-	awayTeamScore: number;
+	awayTeamScore: string;
 	weHookedThem: boolean;
 	venueCity: string;
 	venueStadium: string;
@@ -30,7 +30,7 @@ const GameStats: React.FC<GameStatsProps> = ({
 			{homeTeam} vs {awayTeam}
 		</h3>
 		<h3 className='text-lg'>
-			{venueCity} -- {venueStadium}
+			{venueCity} @ {venueStadium}
 		</h3>
 	</div>
 );

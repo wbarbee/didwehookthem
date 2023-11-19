@@ -8,6 +8,16 @@ export interface Game {
 	competitions: Competition[];
 }
 
+export interface FormattedGameData {
+	gameStatus?: string;
+	homeTeam?: string;
+	homeTeamScore?: string;
+	awayTeam?: string;
+	awayTeamScore?: string;
+	venueCity?: string;
+	venueStadium?: string;
+}
+
 interface Venue {
 	address: {
 		city: string;
@@ -16,11 +26,11 @@ interface Venue {
 	fullName: string;
 }
 
-export interface Team {
+interface Team {
 	displayName: string;
 }
 
-export interface CompetitionStatus {
+interface CompetitionStatus {
 	clock: number;
 	displayClock: string;
 	period: number;
@@ -35,12 +45,12 @@ export interface CompetitionStatus {
 	};
 }
 
-export interface Competitor {
+interface Competitor {
 	team: Team;
 	score: string;
 }
 
-export interface Competition {
+interface Competition {
 	id: string;
 	uid: string;
 	date: string;
