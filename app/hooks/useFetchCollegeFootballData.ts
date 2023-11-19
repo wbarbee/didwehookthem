@@ -34,7 +34,6 @@ export default useFetchCollegeFootballData;
 
 function extractTexasLonghornsData(json: any): Game | null {
 	const games: Game[] = json.events;
-	console.log(games);
 	const longhornsGame = games.find((game) =>
 		game.name.includes('Texas Longhorns')
 	);

@@ -4,20 +4,16 @@ export interface Game {
 	date: string;
 	name: string;
 	shortName: string;
-	season: Season;
 	status: CompetitionStatus;
-	week: Week;
 	competitions: Competition[];
 }
 
-export interface Season {
-	year: number;
-	type: number;
-	slug: string;
-}
-
-export interface Week {
-	number: number;
+interface Venue {
+	address: {
+		city: string;
+		state: string;
+	};
+	fullName: string;
 }
 
 export interface Team {
@@ -57,4 +53,5 @@ export interface Competition {
 	recent: boolean;
 	status: CompetitionStatus;
 	startDate: string;
+	venue: Venue;
 }
