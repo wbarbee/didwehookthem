@@ -18,15 +18,15 @@ const GameStats: React.FC<GameStatsProps> = ({
 	venueStadium,
 }) => (
 	<div
-		className={`game-stats py-8 w-[90%] max-w-[25em] mx-auto text-xl font-light md:text-2xl bg-[rbga(255,255,255,0.8)] border ${
+		className={`game-stats bg-whiteFrost py-5 w-[90%] max-w-[22em] mx-auto text-xl font-light md:text-2xl border font-gothic rounded-sm ${
 			weHookedThem
-				? 'border-[#e16f1f] text-white'
+				? 'border-[#e16f1f] text-black dark:text-white'
 				: 'border-red-500 text-red-500'
 		}`}>
-		<h2 className='text-6xl font-bold tracking-wider'>
+		<h2 className='text-5xl font-bold tracking-wider'>
 			{homeTeamScore} - {awayTeamScore}
 		</h2>
-		<h3 className='pt-5 pb-2'>
+		<h3 className='pt-3 pb-1 font-lg'>
 			{homeTeam} vs {awayTeam}
 		</h3>
 		<h3 className='text-lg'>
