@@ -51,7 +51,7 @@ const Home = () => {
 						className={`text-[13cqw] md:text-[10cqw] lg:text-[8cqw] xl:text-[7cqw] text-[#e16f1f] ${
 							weHookedThem ? 'text-[#e16f1f]' : 'text-red-500'
 						}`}>
-						{weHookedThem ? 'Hooked Them' : 'Did Not Hook Them'}
+						{weHookedThem ? 'Hooked Them.' : 'Did not hook them.'}
 					</h1>
 					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[25rem] mx-auto'>
 						<img
@@ -74,7 +74,7 @@ const Home = () => {
 			{gameData.gameStatus !== 'Final' && (
 				<div className='max-w-[55rem] w-full mx-auto text-center'>
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-[#e16f1f]'>
-						Currently Trying to Hook
+						Currently trying to hook...
 					</h1>
 					<div className='mt-[3.5rem] mb-[4rem] w-[95%] max-w-[25rem] mx-auto'>
 						<img
