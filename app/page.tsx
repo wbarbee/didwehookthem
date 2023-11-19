@@ -78,6 +78,9 @@ const Home = () => {
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-[#e16f1f]'>
 						Currently Trying to Hook
 					</h1>
+					<div className='md:-mt-[5rem] md:-mb-[4rem]'>
+						<img src='/images/horns.png' alt='Texas Longhorns Logo' />
+					</div>
 				</div>
 			)}
 		</section>
