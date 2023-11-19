@@ -43,7 +43,7 @@ const Home = () => {
 						}`}>
 						{weHookedThem ? 'Hooked Them.' : 'Did not hook them.'}
 					</h1>
-					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[25rem] mx-auto'>
+					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[18rem] md:max-w-[25rem] mx-auto'>
 						<img
 							src='/images/horns-1.png'
 							alt='Texas Longhorns Logo'

@@ -23,10 +23,10 @@ const GameStats: React.FC<GameStatsProps> = ({
 				? 'border-[#e16f1f] text-black dark:text-white'
 				: 'border-red-500 text-red-500'
 		}`}>
-		<h2 className='text-3xl md:text-5xl font-bold tracking-wider'>
+		<h2 className='text-3xl md:text-5xl font-bold tracking-wider text-gray-800'>
 			{homeTeamScore} - {awayTeamScore}
 		</h2>
-		<h3 className='pt-3 pb-1 text-sm md:text-lg'>
+		<h3 className='pt-3 pb-1 text-sm md:text-lg font-semibold tracking-10 text-gray-700'>
 			{homeTeam} vs {awayTeam}
 		</h3>
 		<h3 className='text-sm md:text-lg'>
