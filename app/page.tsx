@@ -29,13 +29,9 @@ const Home = () => {
 
 	const weHookedThem =
 		(data.homeTeam === 'Texas Longhorns' &&
-			data.homeTeamScore &&
-			data.awayTeamScore &&
-			parseInt(data.homeTeamScore, 10) > parseInt(data.awayTeamScore, 10)) ||
+			Number(data.homeTeamScore) > Number(data.awayTeamScore)) ||
 		(data.awayTeam === 'Texas Longhorns' &&
-			data.awayTeamScore &&
-			data.homeTeamScore &&
-			parseInt(data.awayTeamScore, 10) > parseInt(data.homeTeamScore, 10));
+			Number(data.awayTeamScore) > Number(data.homeTeamScore));
 
 	return (
 		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[40rem]'>
