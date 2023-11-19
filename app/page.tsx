@@ -53,15 +53,13 @@ const Home = () => {
 						}`}>
 						{weHookedThem ? 'Hooked Them' : 'Did Not Hook Them'}
 					</h1>
-					{weHookedThem && (
-						<div className='md:-mt-[5rem] md:-mb-[4rem]'>
-							<img
-								src='/images/horns.png'
-								alt='Texas Longhorns Logo'
-								className={weHookedThem ? 'rotate-0' : 'rotate-180'}
-							/>
-						</div>
-					)}
+					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[25rem] mx-auto'>
+						<img
+							src='/images/horns-1.png'
+							alt='Texas Longhorns Logo'
+							className={weHookedThem ? 'rotate-0' : 'rotate-180'}
+						/>
+					</div>
 					<GameStats
 						homeTeam={gameData.homeTeam}
 						homeTeamScore={gameData.homeTeamScore}
@@ -78,8 +76,12 @@ const Home = () => {
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-[#e16f1f]'>
 						Currently Trying to Hook
 					</h1>
-					<div className='md:-mt-[5rem] md:-mb-[4rem]'>
-						<img src='/images/horns.png' alt='Texas Longhorns Logo' />
+					<div className='mt-[3.5rem] mb-[4rem] w-[95%] max-w-[25rem] mx-auto'>
+						<img
+							src='/images/horns-1.png'
+							alt='Texas Longhorns Logo'
+							className={weHookedThem ? 'rotate-0' : 'rotate-180'}
+						/>
 					</div>
 				</div>
 			)}
