@@ -37,6 +37,8 @@ const Home = () => {
 		'https://ik.imagekit.io/mefqellzto/misc/horns-1__ZLUt7X1v.webp?updatedAt=1700495440156';
 	const refreshSrc =
 		'https://ik.imagekit.io/mefqellzto/misc/refresh_7D_Gnmjk3.svg?updatedAt=1700495470983';
+	const darkRefreshSrc =
+		'https://ik.imagekit.io/mefqellzto/misc/refresh-dark-mode_9GNAmZqHg.png?updatedAt=1700511360761';
 
 	const weHookedThem =
 		(data.homeTeam === 'Texas Longhorns' &&
@@ -90,16 +92,18 @@ const Home = () => {
 					</div>
 				</div>
 			)}
-			<p className='fixed w-[95%] max-w-[5.5rem] bottom-2 right-0'>
+			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-0'>
 				<button
 					className='font-gothic font-xs opacity-50 hover:opacity-100 transition-all ease-in-out duration-300 dark:bg-whiteFrost hover:bg-blackFrost dark:text-white px-2 py-1 text-black rounded-sm'
 					onClick={handleRefreshClick}>
 					<span className='text-xs'>Refresh</span>
-					<img
-						className='w-[0.75rem] inline-block ml-2 align-middle mt-0'
-						src={refreshSrc}
-						alt='refresh icon'
-					/>
+					<picture className='inline-block w-[0.85rem] ml-2 align-middle'>
+						<source
+							srcSet={darkRefreshSrc}
+							media='(prefers-color-scheme: dark)'
+						/>
+						<img src={refreshSrc} alt='Refresh Icon' />
+					</picture>
 				</button>
 			</p>
 		</section>
