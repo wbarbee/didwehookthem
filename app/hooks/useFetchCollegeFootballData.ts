@@ -27,8 +27,6 @@ const useFetchCollegeFootballData = () => {
 
 				const longhornsData = extractTexasLonghornsData(json);
 
-				console.log({ longhornsData });
-
 				if (longhornsData) {
 					setFormattedData({
 						gameStatus: longhornsData.status.type.shortDetail,

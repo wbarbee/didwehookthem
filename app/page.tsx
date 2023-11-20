@@ -14,6 +14,7 @@ const Home = () => {
 				<span className='loader'></span>
 			</div>
 		);
+
 	if (error)
 		return (
 			<div className='flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
