@@ -21,7 +21,7 @@ const config: Config = {
 				burntOrange: '#BF5700',
 			},
 			animation: {
-				'fade-in': 'fadeIn 0.5s ease-out',
+				'fade-in': 'fadeIn 0.65s ease-out',
 			},
 			fontFamily: {
 				playfair: 'Playfair Display',
