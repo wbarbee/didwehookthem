@@ -41,7 +41,7 @@ const Home = () => {
 						className={`text-[13cqw] md:text-[10cqw] lg:text-[8cqw] xl:text-[5cqw] text-[#e16f1f] ${
 							weHookedThem ? 'text-[#e16f1f]' : 'text-red-500'
 						}`}>
-						{weHookedThem ? 'We hooked them' : 'Did not hook them'}
+						{weHookedThem ? 'We hooked them.' : 'Did not hook them.'}
 					</h1>
 					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[18rem] md:max-w-[25rem] mx-auto'>
 						<img
