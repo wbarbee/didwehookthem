@@ -52,7 +52,11 @@ const Home = () => {
 						<img
 							src='/images/horns-1.png'
 							alt='Texas Longhorns Logo'
-							className={weHookedThem ? 'rotate-0' : 'rotate-180'}
+							className={
+								weHookedThem
+									? 'rotate-0 animate-fade-in'
+									: 'rotate-180 animate-fade-in'
+							}
 						/>
 					</div>
 					<GameStats
@@ -75,7 +79,11 @@ const Home = () => {
 						<img
 							src='/images/horns-1.png'
 							alt='Texas Longhorns Logo'
-							className={weHookedThem ? 'rotate-0' : 'rotate-180'}
+							className={
+								weHookedThem
+									? 'rotate-0 animate-fade-in'
+									: 'rotate-180 animate-fade-in'
+							}
 						/>
 					</div>
 				</div>
