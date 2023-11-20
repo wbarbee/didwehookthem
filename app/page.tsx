@@ -9,7 +9,7 @@ const Home = () => {
 		return (
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
 				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-burntOrange text-center'>
-					Did We Hook Them? Calculating...
+					Did We Hook Them?
 				</h1>
 				<span className='loader'></span>
 			</div>
@@ -83,12 +83,8 @@ const Home = () => {
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-burntOrange'>
 						Currently trying to hook...
 					</h1>
-					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[25rem] mx-auto'>
-						<img
-							src={hornsSrc}
-							alt='Texas Longhorns Logo'
-							className='opacity-10'
-						/>
+					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[25rem] mx-auto animate-pulse-opacity'>
+						<img src={hornsSrc} alt='Texas Longhorns Logo' />
 					</div>
 				</div>
 			)}

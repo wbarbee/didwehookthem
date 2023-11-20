@@ -20,12 +20,17 @@ const config: Config = {
 			},
 			animation: {
 				'fade-in': 'fadeIn 0.65s ease-out',
+				'pulse-opacity': 'pulse 5s infinite',
 			},
 			fontFamily: {
 				playfair: ['Playfair Display', 'serif'],
 				gothic: ['Gothic A1', 'sans-serif'],
 			},
 			keyframes: {
+				pulse: {
+					'0%, 100%': { opacity: '1.0' },
+					'50%': { opacity: '0.3' },
+				},
 				fadeIn: {
 					'0%': {
 						opacity: '0',
