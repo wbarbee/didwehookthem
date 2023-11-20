@@ -31,17 +31,7 @@ const useFetchCollegeFootballData = () => {
 				const longhornsData = extractTexasLonghornsData(json);
 
 				if (longhornsData) {
-					setFormattedData({
-						gameStatus: longhornsData.status.type.shortDetail,
-						homeTeam:
-							longhornsData.competitions[0].competitors[0].team.displayName,
-						homeTeamScore: longhornsData.competitions[0].competitors[0].score,
-						awayTeam:
-							longhornsData.competitions[0].competitors[1].team.displayName,
-						awayTeamScore: longhornsData.competitions[0].competitors[1].score,
-						venueCity: `${longhornsData.competitions[0].venue.address.city}, ${longhornsData.competitions[0].venue.address.state}`,
-						venueStadium: longhornsData.competitions[0].venue.fullName,
-					});
+					setFormattedData(formatGameData(longhornsData));
 				}
 
 				setTimeout(() => {
@@ -67,17 +57,29 @@ const useFetchCollegeFootballData = () => {
 
 export default useFetchCollegeFootballData;
 
-function getDateString(daysOffset: number): string {
+const getDateString = (daysOffset: number): string => {
 	const date = new Date();
 	date.setDate(date.getDate() + daysOffset);
 	return date.toISOString().split('T')[0].replace(/-/g, '');
-}
+};
 
-function extractTexasLonghornsData(json: any): Game | null {
+const extractTexasLonghornsData = (json: any): Game | null => {
 	const games: Game[] = json.events;
 	const longhornsGame = games.find((game) =>
 		game.name.includes('Texas Longhorns')
 	);
 
 	return longhornsGame || null;
-}
+};
+
+const formatGameData = (game: Game): FormattedGameData => {
+	return {
+		gameStatus: game.status.type.shortDetail,
+		homeTeam: game.competitions[0].competitors[0].team.displayName,
+		homeTeamScore: game.competitions[0].competitors[0].score,
+		awayTeam: game.competitions[0].competitors[1].team.displayName,
+		awayTeamScore: game.competitions[0].competitors[1].score,
+		venueCity: `${game.competitions[0].venue.address.city}, ${game.competitions[0].venue.address.state}`,
+		venueStadium: game.competitions[0].venue.fullName,
+	};
+};
