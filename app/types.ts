@@ -8,6 +8,16 @@ export interface Game {
 	competitions: Competition[];
 }
 
+export interface GameStatsProps {
+	homeTeam: string;
+	homeTeamScore: string;
+	awayTeam: string;
+	awayTeamScore: string;
+	weHookedThem: boolean;
+	venueCity: string;
+	venueStadium: string;
+}
+
 export interface FormattedGameData {
 	gameStatus?: string;
 	homeTeam?: string;

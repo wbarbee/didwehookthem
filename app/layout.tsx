@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Footer from './components/Footer';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
+const bodyClasses = 'dark:bg-gray-950 bg-white font-playfair';
 
 export const metadata: Metadata = {
 	title: 'Did we hook them?',
@@ -16,14 +18,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body
-				className={`${
-					inter.className
-				} ${'dark:bg-gray-950 bg-white font-playfair'}`}>
+			<body className={`${inter.className} ${bodyClasses}`}>
 				{children}
-				<footer className='font-gothic font-xs text-gray-400 text-center py-3'>
-					© {new Date().getFullYear()} Will Barbee. All rights reserved.
-				</footer>
+				<Footer />
 			</body>
 		</html>
 	);

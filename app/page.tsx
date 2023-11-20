@@ -8,7 +8,7 @@ const Home = () => {
 	if (loading)
 		return (
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
-				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-[#e16f1f] text-center'>
+				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-burntOrange text-center'>
 					Did We Hook Them? Calculating...
 				</h1>
 				<span className='loader'></span>
@@ -17,7 +17,7 @@ const Home = () => {
 	if (error)
 		return (
 			<div className='flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
-				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-[#e16f1f] text-center'>
+				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-burntOrange text-center'>
 					An error occurred while trying to fetch the data. Please try again
 					later.
 				</h1>
@@ -43,8 +43,8 @@ const Home = () => {
 			{data.gameStatus === 'Final' && (
 				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 					<h1
-						className={`text-[12cqw] md:text-[10cqw] lg:text-[8cqw] xl:text-[5cqw] text-[#e16f1f] ${
-							weHookedThem ? 'text-[#e16f1f]' : 'text-red-500'
+						className={`text-[3.5rem] md:text-[5rem] text-burntOrange ${
+							weHookedThem ? 'text-burntOrange' : 'text-red-500'
 						}`}>
 						{weHookedThem ? 'We hooked them.' : 'Did not hook them.'}
 					</h1>
@@ -68,10 +68,10 @@ const Home = () => {
 			)}
 			{data.gameStatus !== 'Final' && (
 				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-full mx-auto text-center'>
-					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-[#e16f1f]'>
+					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-burntOrange'>
 						Currently trying to hook...
 					</h1>
-					<div className='mt-[3.5rem] mb-[4rem] w-[95%] max-w-[25rem] mx-auto'>
+					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[25rem] mx-auto'>
 						<img
 							src='/images/horns-1.png'
 							alt='Texas Longhorns Logo'
