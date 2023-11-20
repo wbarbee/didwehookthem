@@ -79,11 +79,7 @@ const Home = () => {
 						<img
 							src='/images/horns-1.png'
 							alt='Texas Longhorns Logo'
-							className={
-								weHookedThem
-									? 'rotate-0 animate-fade-in'
-									: 'rotate-180 animate-fade-in'
-							}
+							className='opacity-10'
 						/>
 					</div>
 				</div>

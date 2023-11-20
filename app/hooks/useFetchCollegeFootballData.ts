@@ -13,10 +13,21 @@ const useFetchCollegeFootballData = () => {
 
 	useEffect(() => {
 		async function fetchData() {
+			const lastWeekDate = getDateString(-7);
+			const currentDate = getDateString(0);
+
 			try {
-				const response = await fetch(endpoint);
+				const response = await fetch(
+					`${endpoint}?dates=${lastWeekDate}-${currentDate}&limit=200`
+				);
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
 				const json = await response.json();
+
 				const longhornsData = extractTexasLonghornsData(json);
+
+				console.log({ longhornsData });
 
 				if (longhornsData) {
 					setFormattedData({
@@ -50,6 +61,12 @@ const useFetchCollegeFootballData = () => {
 };
 
 export default useFetchCollegeFootballData;
+
+function getDateString(daysOffset: number): string {
+	const date = new Date();
+	date.setDate(date.getDate() + daysOffset);
+	return date.toISOString().split('T')[0].replace(/-/g, '');
+}
 
 function extractTexasLonghornsData(json: any): Game | null {
 	const games: Game[] = json.events;
