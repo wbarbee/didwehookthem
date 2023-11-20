@@ -3,3 +3,41 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;500&family=Playfair+Display&display=swap');
+
+.loader {
+	width: 48px;
+	height: 48px;
+	margin: 2rem auto 0;
+	border: 10px solid #fff;
+	border-radius: 50%;
+	position: relative;
+	transform: rotate(45deg);
+	box-sizing: border-box;
+}
+.loader::before {
+	content: '';
+	position: absolute;
+	box-sizing: border-box;
+	inset: -10px;
+	border-radius: 50%;
+	border: 10px solid #e16f1f;
+	animation: prixClipFix 2s infinite linear;
+}
+
+@keyframes prixClipFix {
+	0% {
+		clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+	}
+	25% {
+		clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+	}
+	50% {
+		clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+	}
+	75% {
+		clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+	}
+	100% {
+		clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+	}
+}

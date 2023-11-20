@@ -34,10 +34,14 @@ const useFetchCollegeFootballData = () => {
 					});
 				}
 
-				setLoading(false);
+				setTimeout(() => {
+					setLoading(false);
+				}, 1250);
 			} catch (error) {
 				setError(error as Error);
-				setLoading(false);
+				setTimeout(() => {
+					setLoading(false);
+				}, 1250);
 			}
 		}
 

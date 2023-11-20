@@ -15,6 +15,7 @@ const config: Config = {
 			},
 			backgroundColor: {
 				whiteFrost: 'rgba(255,255,255,0.3)',
+				blackFrost: 'rgba(0,0,0,0.1)',
 			},
 			color: {
 				burntOrange: '#BF5700',

@@ -11,6 +11,7 @@ const Home = () => {
 				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-[#e16f1f] text-center'>
 					Did We Hook Them? Calculating...
 				</h1>
+				<span className='loader'></span>
 			</div>
 		);
 	if (error)
@@ -25,7 +26,11 @@ const Home = () => {
 
 	if (!data) return null;
 
-	console.log(data);
+	const handleRefreshClick = () => {
+		if (typeof window !== 'undefined') {
+			window.location.reload();
+		}
+	};
 
 	const weHookedThem =
 		(data.homeTeam === 'Texas Longhorns' &&
@@ -34,9 +39,9 @@ const Home = () => {
 			Number(data.awayTeamScore) > Number(data.homeTeamScore));
 
 	return (
-		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[45rem] py-8'>
+		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[45rem] py-8 relative'>
 			{data.gameStatus === 'Final' && (
-				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm'>
+				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm relative'>
 					<h1
 						className={`text-[12cqw] md:text-[10cqw] lg:text-[8cqw] xl:text-[5cqw] text-[#e16f1f] ${
 							weHookedThem ? 'text-[#e16f1f]' : 'text-red-500'
@@ -75,6 +80,18 @@ const Home = () => {
 					</div>
 				</div>
 			)}
+			<p className='absolute w-[95%] max-w-[5.5rem] bottom-2 md:bottom-2 right-0'>
+				<button
+					className='font-gothic font-xs opacity-50 hover:opacity-100 transition-all ease-in-out duration-300 dark:bg-whiteFrost hover:bg-blackFrost dark:text-white px-2 py-1 text-black rounded-sm'
+					onClick={handleRefreshClick}>
+					<span className='text-xs'>Refresh</span>
+					<img
+						className='w-[0.75rem] inline-block ml-2 align-middle mt-0'
+						src='/images/refresh.svg'
+						alt='refresh icon'
+					/>
+				</button>
+			</p>
 		</section>
 	);
 };
