@@ -5,7 +5,6 @@ const endpoint =
 	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard';
 
 const useFetchCollegeFootballData = () => {
-	const [data, setData] = useState<Game | null>(null);
 	const [formattedData, setFormattedData] = useState<FormattedGameData | null>(
 		null
 	);
@@ -19,7 +18,6 @@ const useFetchCollegeFootballData = () => {
 				const json = await response.json();
 				const longhornsData = extractTexasLonghornsData(json);
 
-				setData(longhornsData);
 				if (longhornsData) {
 					setFormattedData({
 						gameStatus: longhornsData.status.type.shortDetail,
