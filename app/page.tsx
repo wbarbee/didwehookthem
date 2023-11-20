@@ -80,7 +80,7 @@ const Home = () => {
 					</div>
 				</div>
 			)}
-			<p className='absolute w-[95%] max-w-[5.5rem] bottom-2 md:bottom-2 right-0'>
+			<p className='fixed w-[95%] max-w-[5.5rem] bottom-2 right-0'>
 				<button
 					className='font-gothic font-xs opacity-50 hover:opacity-100 transition-all ease-in-out duration-300 dark:bg-whiteFrost hover:bg-blackFrost dark:text-white px-2 py-1 text-black rounded-sm'
 					onClick={handleRefreshClick}>
