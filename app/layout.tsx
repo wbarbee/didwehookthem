@@ -21,6 +21,9 @@ export default function RootLayout({
 					inter.className
 				} ${'dark:bg-gray-950 bg-white font-playfair'}`}>
 				{children}
+				<footer className='font-gothic font-xs text-gray-400 text-center py-3'>
+					© {new Date().getFullYear()} Will Barbee. All rights reserved.
+				</footer>
 			</body>
 		</html>
 	);

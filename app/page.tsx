@@ -34,7 +34,7 @@ const Home = () => {
 			Number(data.awayTeamScore) > Number(data.homeTeamScore));
 
 	return (
-		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[40rem]'>
+		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[45rem]'>
 			{data.gameStatus === 'Final' && (
 				<div className='max-w-[55rem] w-full mx-auto text-center  pt-5 pb-8'>
 					<h1
