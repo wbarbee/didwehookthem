@@ -7,7 +7,7 @@ const Home = () => {
 
 	if (loading)
 		return (
-			<div className='flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
+			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
 				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-[#e16f1f] text-center'>
 					Did We Hook Them? Calculating...
 				</h1>
@@ -36,7 +36,7 @@ const Home = () => {
 	return (
 		<section className='flex flex-col justify-center align-center w-full animate-fade-in h-screen min-h-[45rem] py-8'>
 			{data.gameStatus === 'Final' && (
-				<div className='max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm'>
+				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm'>
 					<h1
 						className={`text-[12cqw] md:text-[10cqw] lg:text-[8cqw] xl:text-[5cqw] text-[#e16f1f] ${
 							weHookedThem ? 'text-[#e16f1f]' : 'text-red-500'
@@ -62,7 +62,7 @@ const Home = () => {
 				</div>
 			)}
 			{data.gameStatus !== 'Final' && (
-				<div className='max-w-[55rem] w-full mx-auto text-center'>
+				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-full mx-auto text-center'>
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-[#e16f1f]'>
 						Currently trying to hook...
 					</h1>
