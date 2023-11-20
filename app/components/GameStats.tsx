@@ -21,7 +21,7 @@ const GameStats: React.FC<GameStatsProps> = ({
 		<h3 className='pt-1 md:pt-3 pb-1 text-sm md:text-lg font-semibold tracking-10 dark:text-gray-200 text-gray-700'>
 			{awayTeam} @ {homeTeam}
 		</h3>
-		<h3 className='text-sm md:text-lg text-gray-700'>
+		<h3 className='text-sm md:text-lg dark:text-gray-300 text-gray-700'>
 			<b>{venueStadium}</b> [{venueCity}]
 		</h3>
 	</div>
