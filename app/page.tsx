@@ -43,7 +43,7 @@ const Home = () => {
 			{data.gameStatus === 'Final' && (
 				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 					<h1
-						className={`text-[3.5rem] md:text-[5rem] text-burntOrange ${
+						className={`text-[3.5rem] md:text-[5rem] text-burntOrange font-playfair ${
 							weHookedThem ? 'text-burntOrange' : 'text-red-500'
 						}`}>
 						{weHookedThem ? 'We hooked them.' : 'Did not hook them.'}
