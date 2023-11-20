@@ -33,6 +33,9 @@ const Home = () => {
 		}
 	};
 
+	const hornsSrc =
+		'https://ik.imagekit.io/mefqellzto/wb_portfolio/horns-1_8LZ3T1hzu.webp?updatedAt=1700495371335';
+
 	const weHookedThem =
 		(data.homeTeam === 'Texas Longhorns' &&
 			Number(data.homeTeamScore) > Number(data.awayTeamScore)) ||
@@ -51,7 +54,7 @@ const Home = () => {
 					</h1>
 					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[18rem] md:max-w-[25rem] mx-auto'>
 						<img
-							src='/images/horns-1.png'
+							src={hornsSrc}
 							alt='Texas Longhorns Logo'
 							className={
 								weHookedThem
@@ -78,7 +81,7 @@ const Home = () => {
 					</h1>
 					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[25rem] mx-auto'>
 						<img
-							src='/images/horns-1.png'
+							src={hornsSrc}
 							alt='Texas Longhorns Logo'
 							className='opacity-10'
 						/>
