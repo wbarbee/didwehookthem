@@ -34,7 +34,9 @@ const Home = () => {
 	};
 
 	const hornsSrc =
-		'https://ik.imagekit.io/mefqellzto/wb_portfolio/horns-1_8LZ3T1hzu.webp?updatedAt=1700495371335';
+		'https://ik.imagekit.io/mefqellzto/misc/horns-1__ZLUt7X1v.webp?updatedAt=1700495440156';
+	const refreshSrc =
+		'https://ik.imagekit.io/mefqellzto/misc/refresh_7D_Gnmjk3.svg?updatedAt=1700495470983';
 
 	const weHookedThem =
 		(data.homeTeam === 'Texas Longhorns' &&
@@ -95,7 +97,7 @@ const Home = () => {
 					<span className='text-xs'>Refresh</span>
 					<img
 						className='w-[0.75rem] inline-block ml-2 align-middle mt-0'
-						src='/images/refresh.svg'
+						src={refreshSrc}
 						alt='refresh icon'
 					/>
 				</button>
