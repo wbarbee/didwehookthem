@@ -12,6 +12,9 @@ const useFetchCollegeFootballData = () => {
 	const [error, setError] = useState<Error | null>(null);
 
 	useEffect(() => {
+		const abortController = new AbortController();
+		const { signal } = abortController;
+
 		async function fetchData() {
 			const lastWeekDate = getDateString(-7);
 			const currentDate = getDateString(0);
@@ -45,14 +48,18 @@ const useFetchCollegeFootballData = () => {
 					setLoading(false);
 				}, 1250);
 			} catch (error) {
-				setError(error as Error);
-				setTimeout(() => {
+				if (!signal.aborted) {
+					setError(error as Error);
 					setLoading(false);
-				}, 1250);
+				}
 			}
 		}
 
 		fetchData();
+
+		return () => {
+			abortController.abort();
+		};
 	}, []);
 
 	return { data: formattedData, loading, error };
