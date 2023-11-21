@@ -56,7 +56,7 @@ const Home = () => {
 						}`}>
 						{weHookedThem ? 'We hooked them.' : 'Did not hook them.'}
 					</h1>
-					<div className='mt-[3rem] mb-[4rem] w-[95%] max-w-[18rem] md:max-w-[25rem] mx-auto'>
+					<div className='mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[25rem] mx-auto'>
 						<img
 							src={hornsSrc}
 							alt='Texas Longhorns Logo'
@@ -83,7 +83,7 @@ const Home = () => {
 					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-burntOrange'>
 						Currently trying to hook...
 					</h1>
-					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[25rem] mx-auto animate-pulse-opacity'>
+					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[15rem] mx-auto animate-pulse-opacity'>
 						<img src={hornsSrc} alt='Texas Longhorns Logo' />
 					</div>
 				</div>
