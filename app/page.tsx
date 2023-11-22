@@ -11,7 +11,7 @@ const Home = () => {
 				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-burntOrange text-center'>
 					Did We Hook Them?
 				</h1>
-				<span className='loader'></span>
+				<span className='loader border-white dark:border-gray-700 border-[10px]'></span>
 			</div>
 		);
 
