@@ -1,4 +1,10 @@
+import { Orbitron } from 'next/font/google';
 import { GameStatsProps } from '../types';
+
+const orbitron = Orbitron({
+	weight: '500',
+	subsets: ['latin'],
+});
 
 const GameStats: React.FC<GameStatsProps> = ({
 	homeTeam,
@@ -16,7 +22,8 @@ const GameStats: React.FC<GameStatsProps> = ({
 				? 'border-red-500 text-red-500'
 				: 'border-burntOrange text-black dark:text-white'
 		}`}>
-		<h2 className='scoreboard font-bold text-3xl md:text-5xl font-oxanium tracking-wider dark:text-gray-400 text-gray-800'>
+		<h2
+			className={`scoreboard font-bold text-3xl md:text-4xl font-oxanium tracking-wider dark:text-gray-400 text-gray-800 ${orbitron.className}`}>
 			{awayTeamScore} - {homeTeamScore}
 		</h2>
 		<h3 className='pt-1 md:pt-3 pb-1 text-sm md:text-lg font-semibold tracking-10 font-gothic dark:text-gray-400 text-gray-700'>

@@ -23,9 +23,10 @@ const config: Config = {
 				'pulse-opacity': 'pulse 5s infinite',
 			},
 			fontFamily: {
-				playfair: ['Playfair Display'],
+				playfair: ['Playfair Display', 'serif'],
 				gothic: ['Gothic A1', 'sans-serif'],
 				oxanium: ['Oxanium', 'sans-serif'],
+				graduate: ['Graduate', 'serif'],
 			},
 			keyframes: {
 				pulse: {
