@@ -12,6 +12,7 @@ export interface GameStatsProps {
 	homeTeam: string;
 	homeTeamScore: string;
 	awayTeam: string;
+	gameStatus: string;
 	awayTeamScore: string;
 	weHookedThem: boolean;
 	venueCity: string;

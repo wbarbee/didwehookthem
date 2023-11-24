@@ -16,12 +16,12 @@ const useFetchCollegeFootballData = () => {
 		const { signal } = abortController;
 
 		async function fetchData() {
-			const lastWeekDate = getDateString(-7);
+			const lastWeekDate = getDateString(-21);
 			const currentDate = getDateString(0);
 
 			try {
 				const response = await fetch(
-					`${endpoint}?dates=${lastWeekDate}-${currentDate}&limit=200`
+					`${endpoint}?dates=${lastWeekDate}-${currentDate}&limit=500`
 				);
 				if (!response.ok) {
 					throw new Error('Network response was not ok');

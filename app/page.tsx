@@ -41,15 +41,16 @@ const Home = () => {
 		'https://ik.imagekit.io/mefqellzto/misc/refresh-dark-mode_9GNAmZqHg.png?updatedAt=1700511360761';
 
 	const weHookedThem =
-		(data.homeTeam === 'Texas Longhorns' &&
-			Number(data.homeTeamScore) > Number(data.awayTeamScore)) ||
+		(data.gameStatus === 'Final' &&
+			data.homeTeam === 'Texas Longhorns' &&
+			Number(data.homeTeamScore) >= Number(data.awayTeamScore)) ||
 		(data.awayTeam === 'Texas Longhorns' &&
-			Number(data.awayTeamScore) > Number(data.homeTeamScore));
+			Number(data.awayTeamScore) >= Number(data.homeTeamScore));
 
 	return (
 		<section className='flex flex-col justify-center align-center w-full h-screen min-h-[45rem] py-8 relative'>
 			{data.gameStatus === 'Final' && (
-				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
+				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 					<h1
 						className={`text-[2.75rem] md:text-[5rem] text-burntOrange font-playfair ${
 							weHookedThem ? 'text-burntOrange' : 'text-red-500'
@@ -71,6 +72,7 @@ const Home = () => {
 						homeTeam={data.homeTeam ?? ''}
 						homeTeamScore={data.homeTeamScore ?? ''}
 						awayTeam={data.awayTeam ?? ''}
+						gameStatus={data.gameStatus ?? ''}
 						awayTeamScore={data.awayTeamScore ?? ''}
 						weHookedThem={weHookedThem}
 						venueCity={data.venueCity ?? ''}
@@ -79,13 +81,23 @@ const Home = () => {
 				</div>
 			)}
 			{data.gameStatus !== 'Final' && (
-				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-full mx-auto text-center'>
-					<h1 className='text-[9cqw] md:text-[7cqw] lg:text-[5cqw] text-burntOrange'>
-						Currently trying to hook...
+				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
+					<h1 className='text-[6cqw] md:text-[3rem] lg:text-[3.5rem] text-burntOrange'>
+						Currently trying to hook them...
 					</h1>
-					<div className='mt-[1rem] :mb-[0.5rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[15rem] mx-auto animate-pulse-opacity'>
+					<div className='mt-[1rem] mb-[2rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[15rem] mx-auto animate-pulse-opacity'>
 						<img src={hornsSrc} alt='Texas Longhorns Logo' />
 					</div>
+					<GameStats
+						homeTeam={data.homeTeam ?? ''}
+						homeTeamScore={data.homeTeamScore ?? ''}
+						awayTeam={data.awayTeam ?? ''}
+						gameStatus={data.gameStatus ?? ''}
+						awayTeamScore={data.awayTeamScore ?? ''}
+						weHookedThem={weHookedThem}
+						venueCity={data.venueCity ?? ''}
+						venueStadium={data.venueStadium ?? ''}
+					/>
 				</div>
 			)}
 			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-0'>

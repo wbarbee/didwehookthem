@@ -9,7 +9,7 @@ const config: Config = {
 	theme: {
 		extend: {
 			backgroundColor: {
-				whiteFrost: 'rgba(255,255,255,0.3)',
+				whiteFrost: 'rgba(255,255,255,0.5)',
 				blackFrost: 'rgba(0,0,0,0.1)',
 			},
 			colors: {
@@ -25,6 +25,7 @@ const config: Config = {
 			fontFamily: {
 				playfair: ['Playfair Display', 'serif'],
 				gothic: ['Gothic A1', 'sans-serif'],
+				oxanium: ['Oxanium', 'sans-serif'],
 			},
 			keyframes: {
 				pulse: {
