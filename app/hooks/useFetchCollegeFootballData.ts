@@ -27,9 +27,7 @@ const useFetchCollegeFootballData = () => {
 					throw new Error('Network response was not ok');
 				}
 				const json = await response.json();
-
 				const longhornsData = extractTexasLonghornsData(json);
-
 				if (longhornsData) {
 					setFormattedData(formatGameData(longhornsData));
 				}
@@ -44,6 +42,8 @@ const useFetchCollegeFootballData = () => {
 				}
 			}
 		}
+
+		console.log('CALLED');
 
 		fetchData();
 
