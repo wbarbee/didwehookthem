@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import { Graduate } from 'next/font/google';
 import Footer from './components/Footer';
 import './globals.css';
 
-const graduate = Graduate({ weight: '400', subsets: ['latin'] });
-const bodyClasses = 'dark:bg-gray-950 bg-white font-playfair';
+const bodyClasses = 'dark:bg-gray-950 bg-white font-graduate';
 
 export const metadata: Metadata = {
 	title: 'Did we hook them?',
@@ -18,7 +16,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={`${bodyClasses} ${graduate.className}`}>
+			<body className={`${bodyClasses}`}>
 				{children}
 				<Footer />
 			</body>
