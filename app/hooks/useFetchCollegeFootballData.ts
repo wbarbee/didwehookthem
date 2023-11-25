@@ -16,7 +16,7 @@ const useFetchCollegeFootballData = () => {
 		const { signal } = abortController;
 
 		async function fetchData() {
-			const lastWeekDate = getDateString(-21);
+			const lastWeekDate = getDateString(-3);
 			const currentDate = getDateString(0);
 
 			try {
@@ -68,6 +68,8 @@ const extractTexasLonghornsData = (json: any): Game | null => {
 	const longhornsGame = games.find((game) =>
 		game.name.includes('Texas Longhorns')
 	);
+
+	console.log(longhornsGame, json);
 
 	return longhornsGame || null;
 };
