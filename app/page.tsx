@@ -86,9 +86,9 @@ const Home = () => {
 					/>
 				</div>
 			)}
-			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-0'>
+			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-2'>
 				<button
-					className='font-gothic font-xs opacity-50 hover:opacity-100 transition-all ease-in-out duration-300 dark:bg-whiteFrost hover:bg-blackFrost dark:text-white px-2 py-1 text-black rounded-sm'
+					className='font-gothic font-xs opacity-50 dark:opacity-70 hover:opacity-100 transition-all ease-in-out duration-300 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-blackFrost dark:text-white px-3 pt-1 pb-[5px] text-black rounded-sm'
 					onClick={handleRefreshClick}>
 					<span className='text-xs'>Refresh</span>
 					<picture className='inline-block w-[0.85rem] ml-2 align-middle'>
