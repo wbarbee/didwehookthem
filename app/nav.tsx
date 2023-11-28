@@ -6,6 +6,7 @@ import { Oxanium } from 'next/font/google';
 interface GameData {
 	teamName: string;
 	score: number | null;
+	gameStatus: string;
 }
 
 const oxanium = Oxanium({
@@ -53,6 +54,14 @@ const Nav = () => {
 		);
 	};
 
+	const isRedRiverRivalry = (gameData: GameData[]) => {
+		return gameData[0].teamName === 'OU' || gameData[1].teamName === 'OU';
+	};
+
+	const isGameScoreFinal = (gameData: GameData[]) => {
+		return gameData[0].gameStatus === 'STATUS_FINAL';
+	};
+
 	return (
 		<nav className='absolute top-0 nav-main ml-3 md:ml-4 mt-4 max-w-[24rem] md:max-w-[26rem] w-full animate-fade-in'>
 			<button
@@ -78,38 +87,69 @@ const Nav = () => {
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
 									<ul className='py-0'>
-										<li
-											className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
-											<span className='mr-2'>
-												{weHookedThem(gameData) ? '✅' : '❌'}
-											</span>
-											<span
-												className={
-													gameData[1].teamName === 'TEX'
-														? 'font-bold text-burntOrange'
-														: 'font-light'
-												}>
-												{gameData[1].teamName} <b>{gameData[1].score}</b>
-											</span>
-											<span className='mx-2'>@</span>
-											<span
-												className={
-													gameData[0].teamName === 'TEX'
-														? 'font-bold text-burntOrange'
-														: 'font-light'
-												}>
-												{gameData[0].teamName} <b>{gameData[0].score}</b>
-											</span>
-											<span className='mx-2'>--</span>
-											<span
-												className={
-													weHookedThem(gameData)
-														? 'text-burntOrange'
-														: 'text-red-500'
-												}>
-												{weHookedThem(gameData) ? 'HOOKED' : 'DID NOT HOOK'}
-											</span>
-										</li>
+										{isGameScoreFinal(gameData) && (
+											<li
+												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
+												<span className='mr-2'>
+													{weHookedThem(gameData) ? '✅' : '❌'}
+												</span>
+												<span
+													className={
+														gameData[1].teamName === 'TEX'
+															? 'font-bold text-burntOrange'
+															: 'font-light'
+													}>
+													{gameData[1].teamName} <b>{gameData[1].score}</b>
+												</span>
+												<span className='mx-2'>
+													{isRedRiverRivalry(gameData) ? 'vs.' : '@'}
+												</span>
+												<span
+													className={
+														gameData[0].teamName === 'TEX'
+															? 'font-bold text-burntOrange'
+															: 'font-light'
+													}>
+													{gameData[0].teamName} <b>{gameData[0].score}</b>
+												</span>
+												<span className='mx-2'>--</span>
+												<span
+													className={
+														weHookedThem(gameData)
+															? 'text-burntOrange'
+															: 'text-red-500'
+													}>
+													{weHookedThem(gameData) ? 'HOOKED' : 'DID NOT HOOK'}
+												</span>
+											</li>
+										)}
+										{!isGameScoreFinal(gameData) && (
+											<li
+												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
+												<span className='mr-2'>❓</span>
+												<span
+													className={
+														gameData[1].teamName === 'TEX'
+															? 'font-bold text-burntOrange'
+															: 'font-light'
+													}>
+													{gameData[1].teamName} <b>{gameData[1].score || 0}</b>
+												</span>
+												<span className='mx-2'>
+													{isRedRiverRivalry(gameData) ? 'vs.' : '@'}
+												</span>
+												<span
+													className={
+														gameData[0].teamName === 'TEX'
+															? 'font-bold text-burntOrange'
+															: 'font-light'
+													}>
+													{gameData[0].teamName} <b>{gameData[0].score || 0}</b>
+												</span>
+												<span className='mx-2'>--</span>
+												<span className='text-gray-800'>YET TO HOOK</span>
+											</li>
+										)}
 									</ul>
 								)}
 							</React.Fragment>

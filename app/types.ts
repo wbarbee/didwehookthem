@@ -92,6 +92,13 @@ interface ScheduleCompetitor {
 
 interface ScheduleCompetition {
 	competitors: ScheduleCompetitor[];
+	status: ScheduleStatus;
+}
+
+interface ScheduleStatus {
+	type: {
+		name: string;
+	};
 }
 
 export interface ScheduleEvent {
@@ -101,4 +108,5 @@ export interface ScheduleEvent {
 export interface FormattedScheduleGameData {
 	score: number | null;
 	teamName: string;
+	gameStatus: string;
 }

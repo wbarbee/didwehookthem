@@ -54,18 +54,19 @@ export default useFetchCollegeFootballData;
 function formatGameData(
 	events: ScheduleEvent[]
 ): FormattedScheduleGameData[][] {
-	return events.map(
-		(event) =>
-			event.competitions[0].competitors
-				.map((competitor) => {
-					const scoreValue = competitor.score?.value ?? null;
-					const teamName = competitor.team?.abbreviation ?? '';
+	console.log(events);
+	return events.map((event) => {
+		const gameStatus = event.competitions[0].status.type.name;
 
-					return {
-						score: scoreValue,
-						teamName: teamName,
-					};
-				})
-				.filter((item) => item.score !== null) // Filter out entries with null score
-	);
+		return event.competitions[0].competitors.map((competitor) => {
+			const scoreValue = competitor.score?.value ?? null;
+			const teamName = competitor.team?.abbreviation ?? '';
+
+			return {
+				score: scoreValue,
+				teamName: teamName,
+				gameStatus,
+			};
+		});
+	});
 }
