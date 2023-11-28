@@ -27,7 +27,9 @@ const useFetchCollegeFootballData = () => {
 				const longhornsData = extractTexasLonghornsData(json);
 				if (longhornsData) {
 					setFormattedData(formatGameData(longhornsData));
-					setLoading(false);
+					setTimeout(() => {
+						setLoading(false);
+					}, 1200);
 				} else {
 					throw new Error('No data found');
 				}
@@ -50,7 +52,9 @@ const useFetchCollegeFootballData = () => {
 				await fetchData(previousWeeksDate, currentDate);
 			}
 
-			setLoading(false);
+			setTimeout(() => {
+				setLoading(false);
+			}, 1200);
 		};
 
 		tryFetchData();
