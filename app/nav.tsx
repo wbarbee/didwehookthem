@@ -58,7 +58,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className='absolute top-0 nav-main ml-3 md:ml-4 mt-4 max-w-[24rem] md:max-w-[26rem] animate-fade-in'>
+		<nav className='absolute top-0 nav-main ml-3 md:ml-4 mt-4 max-w-[24rem] md:max-w-[26rem] w-full animate-fade-in'>
 			<button
 				onClick={toggleMenu}
 				className='px-3 py-2 material-icons bg-gray-200 hover:bg-gray-300 rounded-sm shadow-md font-gothic transition-all ease-in-out duration-400'>
@@ -73,9 +73,9 @@ const Nav = () => {
 			</button>
 
 			{isMenuOpen && (
-				<div className='dropdown-wrapper relative ml-4 min-w-[25rem] w-full'>
+				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[25rem] w-full'>
 					<div className='caret'></div>
-					<div className='absolute -left-[1rem] md:left-1 bg-gray-200 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400'>
+					<div className='absolute -left-[1rem] md:left-1 bg-gray-200 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[21rem] md:max-w-full'>
 						{navData.map((gameData: GameData[], index: number) => (
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
