@@ -88,7 +88,7 @@ const Nav = () => {
 											<span
 												className={
 													gameData[1].teamName === 'Texas Longhorns'
-														? 'font-bold text-orange-500'
+														? 'font-bold text-burntOrange'
 														: 'font-light'
 												}>
 												{gameData[1].teamName} {gameData[1].score}
@@ -97,7 +97,7 @@ const Nav = () => {
 											<span
 												className={
 													gameData[0].teamName === 'Texas Longhorns'
-														? 'font-bold text-orange-500'
+														? 'font-bold text-burntOrange'
 														: 'font-light'
 												}>
 												{gameData[0].teamName} {gameData[0].score}

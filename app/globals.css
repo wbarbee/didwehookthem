@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;800&family=News+Cycle:wght@700&family=Orbitron:wght@500&family=Oxanium:wght@500&family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;500;800&family=News+Cycle:wght@700&family=Orbitron:wght@500&family=Oxanium:wght@300;500&family=Playfair+Display&display=swap');
 
 .nav-main {
 	z-index: 1000;
@@ -24,7 +24,7 @@
 	box-sizing: border-box;
 	inset: -10px;
 	border-radius: 50%;
-	border: 10px solid #e16f1f;
+	border: 10px solid #c05700;
 	animation: prixClipFix 2s infinite linear;
 }
 
