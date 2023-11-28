@@ -56,6 +56,12 @@
 	border-bottom: 20px solid #d1d5dc;
 }
 
+@media (prefers-color-scheme: dark) {
+	.dropdown-wrapper::before {
+		border-bottom: 20px solid #1f2937;
+	}
+}
+
 @media (min-width: 768px) {
 	.dropdown-wrapper::before {
 		top: 2px;

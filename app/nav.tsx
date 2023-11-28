@@ -66,8 +66,8 @@ const Nav = () => {
 		<nav className='absolute top-0 nav-main ml-3 md:ml-4 mt-4 max-w-[24rem] md:max-w-[26rem] w-full animate-fade-in'>
 			<button
 				onClick={toggleMenu}
-				className={`px-3 py-2 material-icons bg-gray-200 hover:bg-gray-300 rounded-sm shadow-md font-gothic transition-all ease-in-out duration-400 ${
-					isMenuOpen ? 'bg-gray-300' : ''
+				className={`px-3 py-2 material-icons bg-gray-200 hover:bg-gray-300 dark:bg-gray-900 dark:hover:bg-gray-800 rounded-sm shadow-md font-gothic transition-all ease-in-out duration-400 ${
+					isMenuOpen ? 'bg-gray-300 dark:bg-gray-800' : ''
 				}`}>
 				<img
 					src='images/horns-1.png'
@@ -81,15 +81,15 @@ const Nav = () => {
 
 			{isMenuOpen && (
 				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[19.5rem] w-full'>
-					<div className='caret'></div>
-					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[17rem] md:max-w-full'>
+					<div className='caret border-color-[#d1d5dc]'></div>
+					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[17rem] md:max-w-full'>
 						{navData.map((gameData: GameData[], index: number) => (
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
 									<ul className='py-0'>
 										{isGameScoreFinal(gameData) && (
 											<li
-												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
+												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className} dark:text-gray-300`}>
 												<span className='mr-2'>
 													{weHookedThem(gameData) ? '✅' : '❌'}
 												</span>
@@ -125,7 +125,7 @@ const Nav = () => {
 										)}
 										{!isGameScoreFinal(gameData) && (
 											<li
-												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
+												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className} dark:text-gray-300`}>
 												<span className='mr-3'>
 													{gameData[0].gameStatus === 'STATUS_SCHEDULED'
 														? '🗓️'
@@ -151,7 +151,9 @@ const Nav = () => {
 													{gameData[0].teamName} <b>{gameData[0].score || 0}</b>
 												</span>
 												<span className='mx-2'>--</span>
-												<span className='text-gray-500'>YET TO HOOK</span>
+												<span className='text-gray-500 dark:text-gray-400'>
+													YET TO HOOK
+												</span>
 											</li>
 										)}
 									</ul>
