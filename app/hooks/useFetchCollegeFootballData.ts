@@ -77,8 +77,6 @@ const extractTexasLonghornsData = (json: any): Game | null => {
 		game.name.includes('Texas Longhorns')
 	);
 
-	console.log(longhornsGame, json);
-
 	return longhornsGame || null;
 };
 

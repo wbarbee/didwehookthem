@@ -76,3 +76,27 @@ interface Competition {
 	startDate: string;
 	venue: Venue;
 }
+
+interface ScheduleTeam {
+	displayName: string;
+}
+
+interface ScheduleCompetitor {
+	score?: {
+		value: number | null;
+	};
+	team?: ScheduleTeam;
+}
+
+interface ScheduleCompetition {
+	competitors: ScheduleCompetitor[];
+}
+
+export interface ScheduleEvent {
+	competitions: ScheduleCompetition[];
+}
+
+export interface FormattedScheduleGameData {
+	score: number | null;
+	teamName: string;
+}

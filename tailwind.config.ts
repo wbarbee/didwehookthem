@@ -13,10 +13,10 @@ const config: Config = {
 				blackFrost: 'rgba(0,0,0,0.1)',
 			},
 			colors: {
-				burntOrange: '#e16f1f',
+				burntOrange: '#c05700',
 			},
 			borderColor: {
-				burntOrange: '#e16f1f',
+				burntOrange: '#c05700',
 			},
 			animation: {
 				'fade-in': 'fadeIn 0.65s ease-out',

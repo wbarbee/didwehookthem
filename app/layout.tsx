@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Footer from './components/Footer';
 import './globals.css';
+import Nav from './nav';
 
-const bodyClasses = 'dark:bg-gray-950 bg-white font-graduate';
+const bodyClasses =
+	'dark:bg-gray-950 bg-white font-graduate w-full h-full min-h-screen ';
 
 export const metadata: Metadata = {
 	title: 'Did we hook them?',
@@ -17,6 +19,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${bodyClasses}`}>
+				<Nav />
 				{children}
 				<Footer />
 			</body>

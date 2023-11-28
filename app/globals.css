@@ -4,6 +4,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;800&family=News+Cycle:wght@700&family=Orbitron:wght@500&family=Oxanium:wght@500&family=Playfair+Display&display=swap');
 
+.nav-main {
+	z-index: 1000;
+}
+
 .loader {
 	width: 48px;
 	height: 48px;
@@ -39,4 +43,14 @@
 	100% {
 		clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
 	}
+}
+
+.dropdown-wrapper::before {
+	content: '';
+	position: absolute;
+	top: 2px; /* Adjust as needed */
+	left: 20px; /* Adjust to align with the dropdown */
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 20px solid #e5e7eb; /* Match the background color of the dropdown */
 }
