@@ -42,7 +42,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className='relative nav-main ml-4 mt-4 max-w-[24rem] md:max-w-[26rem] animate-fade-in'>
+		<nav className='relative nav-main ml-3 md:ml-4 mt-4 max-w-[24rem] md:max-w-[26rem] animate-fade-in'>
 			<button
 				onClick={toggleMenu}
 				className='px-3 py-2 material-icons bg-gray-200 hover:bg-gray-300 rounded-sm shadow-md font-gothic transition-all ease-in-out duration-400'>
