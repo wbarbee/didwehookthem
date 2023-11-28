@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import { Oxanium } from 'next/font/google';
 
@@ -20,6 +20,22 @@ const Nav = () => {
 		error: navError,
 	} = useFetchLonghornsSchedule();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	useEffect(() => {
+		const handleOutsideClick = (event: any) => {
+			if (isMenuOpen && !event.target.closest('.nav-main')) {
+				setIsMenuOpen(false);
+			}
+		};
+
+		if (isMenuOpen) {
+			document.addEventListener('click', handleOutsideClick);
+		}
+
+		return () => {
+			document.removeEventListener('click', handleOutsideClick);
+		};
+	}, [isMenuOpen]);
 
 	if (navLoading || navError || !navData) return null;
 
