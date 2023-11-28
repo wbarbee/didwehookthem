@@ -54,6 +54,7 @@ export default useFetchCollegeFootballData;
 function formatGameData(
 	events: ScheduleEvent[]
 ): FormattedScheduleGameData[][] {
+	console.log(events);
 	return events.map((event) => {
 		const gameStatus = event.competitions[0].status.type.name;
 

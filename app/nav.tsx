@@ -126,7 +126,11 @@ const Nav = () => {
 										{!isGameScoreFinal(gameData) && (
 											<li
 												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
-												<span className='mr-2'>❓</span>
+												<span className='mr-3'>
+													{gameData[0].gameStatus === 'STATUS_SCHEDULED'
+														? '🗓️'
+														: '⏳'}
+												</span>
 												<span
 													className={
 														gameData[1].teamName === 'TEX'
@@ -147,7 +151,7 @@ const Nav = () => {
 													{gameData[0].teamName} <b>{gameData[0].score || 0}</b>
 												</span>
 												<span className='mx-2'>--</span>
-												<span className='text-gray-800'>YET TO HOOK</span>
+												<span className='text-gray-500'>YET TO HOOK</span>
 											</li>
 										)}
 									</ul>
