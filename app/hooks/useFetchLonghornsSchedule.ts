@@ -23,7 +23,6 @@ const useFetchCollegeFootballData = () => {
 				}
 				const json = await response.json();
 				const events = json.events;
-				console.log('events: ', events);
 				if (events) {
 					setFormattedData(formatGameData(events));
 				} else {
@@ -41,8 +40,6 @@ const useFetchCollegeFootballData = () => {
 		};
 
 		fetchData();
-
-		console.log('formattedData: ', formattedData);
 
 		return () => {
 			abortController.abort();
