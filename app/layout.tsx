@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Footer from './components/Footer';
 import './globals.css';
 import Nav from './nav';
+import { Analytics } from '@vercel/analytics/react';
 
 const bodyClasses =
 	'dark:bg-gray-950 bg-white font-graduate w-full h-full min-h-screen ';
@@ -21,6 +22,7 @@ export default function RootLayout({
 			<body className={`${bodyClasses}`}>
 				<Nav />
 				{children}
+				<Analytics />
 				<Footer />
 			</body>
 		</html>
