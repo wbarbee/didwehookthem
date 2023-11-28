@@ -48,9 +48,9 @@
 .dropdown-wrapper::before {
 	content: '';
 	position: absolute;
-	top: 2px; /* Adjust as needed */
-	left: 20px; /* Adjust to align with the dropdown */
+	top: 2px;
+	left: 20px;
 	border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
-	border-bottom: 20px solid #e5e7eb; /* Match the background color of the dropdown */
+	border-bottom: 20px solid #e5e7eb;
 }
