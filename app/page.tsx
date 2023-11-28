@@ -1,29 +1,15 @@
 'use client';
 import useFetchCollegeFootballData from './hooks/useFetchCollegeFootballData';
 import GameStats from './components/GameStats';
+import Loading from './components/Loading';
+import ErrorMsg from './components/ErrorMsg';
 
 const Home = () => {
 	const { data, loading, error } = useFetchCollegeFootballData();
 
-	if (loading)
-		return (
-			<div className='-mt-[3rem] md:mt-0 mb-2rem md:mb-0 flex flex-col justify-center align-center w-full h-screen animate-fade-in'>
-				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-burntOrange text-center'>
-					Did We Hook Them?
-				</h1>
-				<span className='loader border-white dark:border-gray-700 border-[10px]'></span>
-			</div>
-		);
+	if (loading) return <Loading />;
 
-	if (error)
-		return (
-			<div className='flex flex-col justify-center align-center w-full h-full min-h-screen animate-fade-in'>
-				<h1 className='text-[6cqw] md:text-[4cqw] lg:text-[3cqw] text-burntOrange text-center'>
-					An error occurred while trying to fetch the data. Please try again
-					later.
-				</h1>
-			</div>
-		);
+	if (error) return <ErrorMsg />;
 
 	if (!data) return null;
 
@@ -48,7 +34,7 @@ const Home = () => {
 			Number(data.awayTeamScore) >= Number(data.homeTeamScore));
 
 	return (
-		<section className='flex flex-col justify-center align-center w-full h-screen min-h-[45rem] py-8 relative font-graduate mt-[-3rem]'>
+		<section className='flex flex-col justify-center align-center w-full h-screen min-h-[45rem] py-4 relative font-graduate -mt-[0.5rem]'>
 			{data.gameStatus === 'Final' && (
 				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 					<h1
