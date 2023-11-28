@@ -15,13 +15,10 @@ const useFetchCollegeFootballData = () => {
 		const abortController = new AbortController();
 		const { signal } = abortController;
 
-		async function fetchData() {
-			const lastWeekDate = getDateString(-3);
-			const currentDate = getDateString(0);
-
+		const fetchData = async (startDate: string, endDate: string) => {
 			try {
 				const response = await fetch(
-					`${endpoint}?dates=${lastWeekDate}-${currentDate}&limit=500`
+					`${endpoint}?dates=${startDate}-${endDate}&limit=500`
 				);
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
@@ -30,22 +27,33 @@ const useFetchCollegeFootballData = () => {
 				const longhornsData = extractTexasLonghornsData(json);
 				if (longhornsData) {
 					setFormattedData(formatGameData(longhornsData));
-				}
-
-				setTimeout(() => {
 					setLoading(false);
-				}, 1250);
+				} else {
+					throw new Error('No data found');
+				}
 			} catch (error) {
 				if (!signal.aborted) {
-					setError(error as Error);
-					setLoading(false);
+					console.error(error);
+					return false;
 				}
 			}
-		}
+			return true;
+		};
 
-		console.log('CALLED');
+		const tryFetchData = async () => {
+			const lastWeekDate = getDateString(-3);
+			const previousWeeksDate = getDateString(-7);
+			const currentDate = getDateString(0);
 
-		fetchData();
+			const success = await fetchData(lastWeekDate, currentDate);
+			if (!success) {
+				await fetchData(previousWeeksDate, currentDate);
+			}
+
+			setLoading(false);
+		};
+
+		tryFetchData();
 
 		return () => {
 			abortController.abort();
