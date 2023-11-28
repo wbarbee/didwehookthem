@@ -39,6 +39,7 @@ interface Venue {
 
 interface Team {
 	displayName: string;
+	abbreviation?: string;
 }
 
 interface CompetitionStatus {
@@ -78,7 +79,8 @@ interface Competition {
 }
 
 interface ScheduleTeam {
-	displayName: string;
+	displayName?: string;
+	abbreviation?: string;
 }
 
 interface ScheduleCompetitor {

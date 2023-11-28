@@ -44,12 +44,8 @@ const Nav = () => {
 	};
 
 	const weHookedThem = (gameData: GameData[]) => {
-		const texasTeam = gameData.find(
-			(team) => team.teamName === 'Texas Longhorns'
-		);
-		const opponentTeam = gameData.find(
-			(team) => team.teamName !== 'Texas Longhorns'
-		);
+		const texasTeam = gameData.find((team) => team.teamName === 'TEX');
+		const opponentTeam = gameData.find((team) => team.teamName !== 'TEX');
 		return (
 			texasTeam?.score &&
 			opponentTeam?.score &&
@@ -75,9 +71,9 @@ const Nav = () => {
 			</button>
 
 			{isMenuOpen && (
-				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[25rem] w-full'>
+				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[19.5rem] w-full'>
 					<div className='caret'></div>
-					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[22rem] md:max-w-full'>
+					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[16rem] md:max-w-full'>
 						{navData.map((gameData: GameData[], index: number) => (
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
@@ -89,20 +85,29 @@ const Nav = () => {
 											</span>
 											<span
 												className={
-													gameData[1].teamName === 'Texas Longhorns'
+													gameData[1].teamName === 'TEX'
 														? 'font-bold text-burntOrange'
 														: 'font-light'
 												}>
-												{gameData[1].teamName} {gameData[1].score}
+												{gameData[1].teamName} <b>{gameData[1].score}</b>
 											</span>
 											<span className='mx-2'>@</span>
 											<span
 												className={
-													gameData[0].teamName === 'Texas Longhorns'
+													gameData[0].teamName === 'TEX'
 														? 'font-bold text-burntOrange'
 														: 'font-light'
 												}>
-												{gameData[0].teamName} {gameData[0].score}
+												{gameData[0].teamName} <b>{gameData[0].score}</b>
+											</span>
+											<span className='mx-2'>--</span>
+											<span
+												className={
+													weHookedThem(gameData)
+														? 'text-burntOrange'
+														: 'text-red-500'
+												}>
+												{weHookedThem(gameData) ? 'HOOKED' : 'DID NOT HOOK'}
 											</span>
 										</li>
 									</ul>

@@ -62,7 +62,7 @@ function formatGameData(
 			event.competitions[0].competitors
 				.map((competitor) => {
 					const scoreValue = competitor.score?.value ?? null;
-					const teamName = competitor.team?.displayName ?? '';
+					const teamName = competitor.team?.abbreviation ?? '';
 
 					return {
 						score: scoreValue,
