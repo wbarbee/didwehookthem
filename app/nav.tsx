@@ -59,7 +59,7 @@ const Nav = () => {
 			{isMenuOpen && (
 				<div className='dropdown-wrapper relative ml-4'>
 					<div className='caret left-[10px] md:left-[20px]'></div>
-					<div className='absolute -left-[1rem] md:left-2 bg-gray-200 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-2 mt-4 transition-all ease-in-out duration-400'>
+					<div className='absolute -left-[1rem] md:left-2 bg-gray-200 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400'>
 						{navData.map((gameData: GameData[], index: number) => (
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
