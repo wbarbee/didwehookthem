@@ -17,6 +17,7 @@
 	transform: rotate(45deg);
 	box-sizing: border-box;
 }
+
 .loader::before {
 	content: '';
 	position: absolute;
