@@ -42,7 +42,7 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className='relative nav-main ml-4 mt-4 max-w-[23.5rem] md:max-w-[26rem] animate-fade-in'>
+		<nav className='relative nav-main ml-4 mt-4 max-w-[22rem] md:max-w-[26rem] animate-fade-in'>
 			<button
 				onClick={toggleMenu}
 				className='px-3 py-2 material-icons bg-gray-200 hover:bg-gray-300 rounded-sm shadow-md font-gothic transition-all ease-in-out duration-400'>
@@ -58,14 +58,14 @@ const Nav = () => {
 
 			{isMenuOpen && (
 				<div className='dropdown-wrapper relative ml-4'>
-					<div className='caret left-[10px] md:left-[20px]'></div>
-					<div className='absolute -left-[1rem] md:left-2 bg-gray-200 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400'>
+					<div className='caret'></div>
+					<div className='absolute -left-[1rem] md:left-1 bg-gray-200 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400'>
 						{navData.map((gameData: GameData[], index: number) => (
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
 									<ul className='py-0'>
 										<li
-											className={`px-4 py-1 block text-black font-light mb-2 text-[12px] md:text-[14px] ${oxanium.className}`}>
+											className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className}`}>
 											<span className='mr-2'>
 												{weHookedThem(gameData) ? '✅' : '❌'}
 											</span>
