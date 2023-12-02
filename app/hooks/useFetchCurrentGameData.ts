@@ -4,7 +4,7 @@ import { Game, FormattedGameData } from '../types';
 const endpoint =
 	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard';
 
-const useFetchCollegeFootballData = () => {
+const useFetchCurrentGameData = () => {
 	const [formattedData, setFormattedData] = useState<FormattedGameData | null>(
 		null
 	);
@@ -18,7 +18,11 @@ const useFetchCollegeFootballData = () => {
 		const fetchData = async (startDate: string, endDate: string) => {
 			try {
 				const response = await fetch(
-					`${endpoint}?dates=${startDate}-${endDate}&limit=500`
+					`${endpoint}?dates=${startDate}-${endDate}&limit=500`,
+					{
+						method: 'GET',
+						cache: 'no-cache',
+					}
 				);
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
@@ -67,7 +71,7 @@ const useFetchCollegeFootballData = () => {
 	return { data: formattedData, loading, error };
 };
 
-export default useFetchCollegeFootballData;
+export default useFetchCurrentGameData;
 
 const getDateString = (daysOffset: number): string => {
 	const date = new Date();

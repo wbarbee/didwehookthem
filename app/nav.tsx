@@ -7,6 +7,7 @@ interface GameData {
 	teamName: string;
 	score: number | null;
 	gameStatus: string;
+	gameDate: string;
 }
 
 const oxanium = Oxanium({
@@ -89,10 +90,11 @@ const Nav = () => {
 									<ul className='py-0'>
 										{isGameScoreFinal(gameData) && (
 											<li
-												className={`px-4 py-1 block text-black font-light mb-2 text-[11px] md:text-[14px] ${oxanium.className} dark:text-gray-300`}>
+												className={`px-4 py-1 block text-black font-light mb-2 text-[12px] md:text-[15px] ${oxanium.className} dark:text-gray-300`}>
 												<span className='mr-2'>
 													{weHookedThem(gameData) ? '✅' : '❌'}
 												</span>
+												<span className='mr-2'>[{gameData[0].gameDate}]</span>
 												<span
 													className={
 														gameData[1].teamName === 'TEX'
@@ -116,10 +118,16 @@ const Nav = () => {
 												<span
 													className={
 														weHookedThem(gameData)
-															? 'text-burntOrange'
-															: 'text-red-500'
+															? 'text-burntOrange text-2xl w-4'
+															: 'text-red-500 text-2xl w-4'
 													}>
-													{weHookedThem(gameData) ? 'HOOKED' : 'DID NOT HOOK'}
+													{weHookedThem(gameData) ? (
+														'🤘'
+													) : (
+														<div className='rotate-180 w-4 ml-2 inline-block'>
+															🤘
+														</div>
+													)}
 												</span>
 											</li>
 										)}

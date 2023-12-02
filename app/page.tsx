@@ -1,11 +1,11 @@
 'use client';
-import useFetchCollegeFootballData from './hooks/useFetchCollegeFootballData';
+import useFetchCurrentGameData from './hooks/useFetchCurrentGameData';
 import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
 
 const Home = () => {
-	const { data, loading, error } = useFetchCollegeFootballData();
+	const { data, loading, error } = useFetchCurrentGameData();
 
 	if (loading) return <Loading />;
 
@@ -26,8 +26,6 @@ const Home = () => {
 	const darkRefreshSrc =
 		'https://ik.imagekit.io/mefqellzto/misc/refresh-dark-mode_9GNAmZqHg.png?updatedAt=1700511360761';
 
-	console.log(data);
-
 	const weHookedThem =
 		(data.gameStatus === 'Final' &&
 			data.homeTeam === 'Texas Longhorns' &&
@@ -46,7 +44,7 @@ const Home = () => {
 						{weHookedThem ? 'We hooked them.' : 'Did not hook them.'}
 					</h1>
 					<div className='mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[20rem] mx-auto'>
-						<img
+						{/* <img
 							src={hornsSrc}
 							alt='Texas Longhorns Logo'
 							className={
@@ -54,7 +52,18 @@ const Home = () => {
 									? 'rotate-0 animate-fade-in'
 									: 'rotate-180 animate-fade-in'
 							}
-						/>
+						/> */}
+						<span
+							className={`text-9xl ${
+								weHookedThem
+									? 'rotate-0 animate-fade-in'
+									: 'rotate-180 animate-fade-in'
+							}}`}>
+							🤘
+						</span>
+						{weHookedThem && (
+							<span className='text-9xl text-burntOrange font-gothic'>!</span>
+						)}
 					</div>
 					<GameStats
 						homeTeam={data.homeTeam ?? ''}

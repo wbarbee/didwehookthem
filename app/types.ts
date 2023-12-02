@@ -88,11 +88,13 @@ interface ScheduleCompetitor {
 		value: number | null;
 	};
 	team?: ScheduleTeam;
+	date: string;
 }
 
 interface ScheduleCompetition {
 	competitors: ScheduleCompetitor[];
 	status: ScheduleStatus;
+	date?: string;
 }
 
 interface ScheduleStatus {
@@ -109,4 +111,5 @@ export interface FormattedScheduleGameData {
 	score: number | null;
 	teamName: string;
 	gameStatus: string;
+	gameDate: string;
 }

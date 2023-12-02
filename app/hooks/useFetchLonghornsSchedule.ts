@@ -4,7 +4,7 @@ import { ScheduleEvent, FormattedScheduleGameData } from '../types';
 const endpoint =
 	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/texas/schedule';
 
-const useFetchCollegeFootballData = () => {
+const useFetchCurrentGameData = () => {
 	const [formattedData, setFormattedData] = useState<
 		FormattedScheduleGameData[][] | null
 	>(null);
@@ -49,13 +49,15 @@ const useFetchCollegeFootballData = () => {
 	return { data: formattedData, loading, error };
 };
 
-export default useFetchCollegeFootballData;
+export default useFetchCurrentGameData;
 
 function formatGameData(
 	events: ScheduleEvent[]
 ): FormattedScheduleGameData[][] {
 	return events.map((event) => {
 		const gameStatus = event.competitions[0].status.type.name;
+		const gameDate = new Date(event.competitions[0].date ?? '');
+		const formattedDate = `${gameDate.getMonth() + 1}/${gameDate.getDate()}`;
 
 		return event.competitions[0].competitors.map((competitor) => {
 			const scoreValue = competitor.score?.value ?? null;
@@ -65,6 +67,7 @@ function formatGameData(
 				score: scoreValue,
 				teamName: teamName,
 				gameStatus,
+				gameDate: formattedDate,
 			};
 		});
 	});
