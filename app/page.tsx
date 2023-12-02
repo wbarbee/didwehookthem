@@ -54,7 +54,7 @@ const Home = () => {
 							}
 						/> */}
 						<span
-							className={`text-9xl ${
+							className={`text-7xl md:text-9xl ${
 								weHookedThem
 									? 'rotate-0 animate-fade-in'
 									: 'rotate-180 animate-fade-in'
