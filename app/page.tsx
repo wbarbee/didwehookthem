@@ -26,6 +26,8 @@ const Home = () => {
 	const darkRefreshSrc =
 		'https://ik.imagekit.io/mefqellzto/misc/refresh-dark-mode_9GNAmZqHg.png?updatedAt=1700511360761';
 
+	console.log(data);
+
 	const weHookedThem =
 		(data.gameStatus === 'Final' &&
 			data.homeTeam === 'Texas Longhorns' &&
@@ -69,7 +71,9 @@ const Home = () => {
 			{data.gameStatus !== 'Final' && (
 				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[55rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 					<h1 className='text-[6.5cqw] md:text-[3rem] lg:text-[3.25rem] text-burntOrange font-graduate'>
-						Currently trying to hook them...
+						{data.gameStatus === 'Scheduled'
+							? 'Game Day. Will we hook them?'
+							: 'Currently trying to hook them.'}
 					</h1>
 					<div className='mt-[1rem] mb-[2rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[15rem] mx-auto animate-pulse-opacity'>
 						<img src={hornsSrc} alt='Texas Longhorns Logo' />

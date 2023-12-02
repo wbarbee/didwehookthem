@@ -86,7 +86,7 @@ const extractTexasLonghornsData = (json: any): Game | null => {
 
 const formatGameData = (game: Game): FormattedGameData => {
 	return {
-		gameStatus: game.status.type.shortDetail,
+		gameStatus: game.status.type.description,
 		homeTeam: game.competitions[0].competitors[0].team.displayName,
 		homeTeamScore: game.competitions[0].competitors[0].score,
 		awayTeam: game.competitions[0].competitors[1].team.displayName,
