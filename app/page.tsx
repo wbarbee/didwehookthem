@@ -62,7 +62,9 @@ const Home = () => {
 							🤘
 						</span>
 						{weHookedThem && (
-							<span className='text-9xl text-burntOrange font-gothic'>!</span>
+							<span className='text-7xl md:text-9xl text-burntOrange font-gothic'>
+								!
+							</span>
 						)}
 					</div>
 					<GameStats
