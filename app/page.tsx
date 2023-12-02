@@ -43,7 +43,10 @@ const Home = () => {
 						}`}>
 						{weHookedThem ? 'We hooked them.' : 'Did not hook them.'}
 					</h1>
-					<div className='mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[20rem] mx-auto'>
+					<div
+						className={`mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[20rem] mx-auto animate-fade-in ${
+							weHookedThem ? 'rotate-0' : 'rotate-180'
+						}`}>
 						{/* <img
 							src={hornsSrc}
 							alt='Texas Longhorns Logo'
@@ -53,19 +56,7 @@ const Home = () => {
 									: 'rotate-180 animate-fade-in'
 							}
 						/> */}
-						<span
-							className={`text-7xl md:text-8xl ${
-								weHookedThem
-									? 'rotate-0 animate-fade-in'
-									: 'rotate-180 animate-fade-in'
-							}}`}>
-							🤘
-						</span>
-						{weHookedThem && (
-							<span className='text-7xl md:text-8xl text-burntOrange font-gothic'>
-								!
-							</span>
-						)}
+						<span className={`text-7xl md:text-8xl`}>🤘</span>
 					</div>
 					<GameStats
 						homeTeam={data.homeTeam ?? ''}
