@@ -83,14 +83,14 @@ const Nav = () => {
 			{isMenuOpen && (
 				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[19.5rem] w-full'>
 					<div className='caret border-color-[#d1d5dc]'></div>
-					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-md w-full z-10 pt-4 pb-2 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[17.5rem] md:max-w-full'>
+					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-md w-full z-10 pt-4 pb-3 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[17.5rem] md:max-w-full'>
 						{navData.map((gameData: GameData[], index: number) => (
 							<React.Fragment key={index}>
 								{gameData.length >= 2 && (
 									<ul className='py-0'>
 										{isGameScoreFinal(gameData) && (
 											<li
-												className={`px-4 py-1 block text-black font-light mb-2 text-[12px] md:text-[15px] ${oxanium.className} dark:text-gray-300`}>
+												className={`px-4 md:py-1 block text-black font-light mb-2 text-[12px] md:text-[15px] ${oxanium.className} dark:text-gray-300`}>
 												<span className='mr-2'>
 													{weHookedThem(gameData) ? '✅' : '❌'}
 												</span>
