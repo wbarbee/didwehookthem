@@ -54,7 +54,7 @@ const Home = () => {
 							}
 						/> */}
 						<span
-							className={`text-7xl md:text-9xl ${
+							className={`text-7xl md:text-8xl ${
 								weHookedThem
 									? 'rotate-0 animate-fade-in'
 									: 'rotate-180 animate-fade-in'
@@ -62,7 +62,7 @@ const Home = () => {
 							🤘
 						</span>
 						{weHookedThem && (
-							<span className='text-7xl md:text-9xl text-burntOrange font-gothic'>
+							<span className='text-7xl md:text-8xl text-burntOrange font-gothic'>
 								!
 							</span>
 						)}
