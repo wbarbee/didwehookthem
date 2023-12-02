@@ -1,6 +1,6 @@
 const Footer = () => {
 	return (
-		<footer className='font-gothic font-xs text-gray-400 text-center py-3'>
+		<footer className='font-gothic font-xs text-gray-400 text-center py-8'>
 			© {new Date().getFullYear()} Will Barbee. All rights reserved.
 		</footer>
 	);
