@@ -45,6 +45,24 @@ const Nav = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
+	// manully add in bowl game if not available
+	if (navData.length === 13) {
+		navData.push([
+			{
+				score: 0,
+				teamName: 'TEX',
+				gameStatus: 'CHAMP_GAME_SCHEDULED',
+				gameDate: '1/1',
+			},
+			{
+				score: 0,
+				teamName: 'WU',
+				gameStatus: 'CHAMP_GAME_SCHEDULED',
+				gameDate: '1/1',
+			},
+		]);
+	}
+
 	const weHookedThem = (gameData: GameData[]) => {
 		const texasTeam = gameData.find((team) => team.teamName === 'TEX');
 		const opponentTeam = gameData.find((team) => team.teamName !== 'TEX');
@@ -55,13 +73,21 @@ const Nav = () => {
 		);
 	};
 
-	const isRedRiverRivalry = (gameData: GameData[]) => {
-		return gameData[0].teamName === 'OU' || gameData[1].teamName === 'OU';
+	const isNeutralTerritory = (gameData: GameData[]) => {
+		return (
+			['OU', 'OKST', 'WU'].includes(gameData[0].teamName) ||
+			['OU', 'OKST', 'WU'].includes(gameData[1].teamName)
+		);
 	};
 
 	const isGameScoreFinal = (gameData: GameData[]) => {
-		return gameData[0].gameStatus === 'STATUS_FINAL';
+		return (
+			gameData[0].gameStatus === 'STATUS_FINAL' ||
+			gameData[0].gameStatus === 'Final'
+		);
 	};
+
+	const navItemStyles = `px-4 pb-1 block text-black font-light mb-2 text-[12px] md:text-[14px] ${oxanium.className} dark:text-gray-300`;
 
 	return (
 		<nav className='absolute top-0 nav-main ml-3 md:ml-4 mt-4 max-w-[21rem] md:max-w-[27rem] w-full animate-fade-in'>
@@ -89,8 +115,7 @@ const Nav = () => {
 								{gameData.length >= 2 && (
 									<ul className='py-0'>
 										{isGameScoreFinal(gameData) && (
-											<li
-												className={`px-4 pb-1 block text-black font-light mb-2 text-[12px] md:text-[14px] ${oxanium.className} dark:text-gray-300`}>
+											<li className={navItemStyles}>
 												<span className='mr-2'>
 													{weHookedThem(gameData) ? '✅' : '❌'}
 												</span>
@@ -104,7 +129,7 @@ const Nav = () => {
 													{gameData[1].teamName} <b>{gameData[1].score}</b>
 												</span>
 												<span className='mx-2'>
-													{isRedRiverRivalry(gameData) ? 'vs.' : '@'}
+													{isNeutralTerritory(gameData) ? 'VS.' : '@'}
 												</span>
 												<span
 													className={
@@ -132,11 +157,12 @@ const Nav = () => {
 											</li>
 										)}
 										{!isGameScoreFinal(gameData) && (
-											<li
-												className={`px-4 pb-1 block text-black font-light mb-2 text-[12px] md:text-[13px] ${oxanium.className} dark:text-gray-300`}>
+											<li className={navItemStyles}>
 												<span className='mr-3'>
 													{gameData[0].gameStatus === 'STATUS_SCHEDULED'
 														? '🗓️'
+														: gameData[0].gameStatus === 'CHAMP_GAME_SCHEDULED'
+														? '🏆'
 														: '⏳'}
 												</span>
 												<span
@@ -145,10 +171,11 @@ const Nav = () => {
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData[1].teamName} <b>{gameData[1].score || 0}</b>
+													{gameData[1].teamName}{' '}
+													<b>{gameData[1].score || ''}</b>
 												</span>
 												<span className='mx-2'>
-													{isRedRiverRivalry(gameData) ? 'vs.' : '@'}
+													{isNeutralTerritory(gameData) ? 'VS.' : '@'}
 												</span>
 												<span
 													className={
@@ -156,7 +183,8 @@ const Nav = () => {
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData[0].teamName} <b>{gameData[0].score || 0}</b>
+													{gameData[0].teamName}{' '}
+													<b>{gameData[0].score || ''}</b>
 												</span>
 												<span className='mx-2'>--</span>
 												<span className='text-gray-500 dark:text-gray-400'>
