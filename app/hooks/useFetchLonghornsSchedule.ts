@@ -68,6 +68,7 @@ function formatGameData(
 				teamName: teamName,
 				gameStatus,
 				gameDate: formattedDate,
+				teamInfo: null,
 			};
 		});
 	});

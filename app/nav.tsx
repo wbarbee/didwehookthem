@@ -53,12 +53,14 @@ const Nav = () => {
 				teamName: 'TEX',
 				gameStatus: 'CHAMP_GAME_SCHEDULED',
 				gameDate: '1/1',
+				teamInfo: '',
 			},
 			{
 				score: 0,
 				teamName: 'WU',
 				gameStatus: 'CHAMP_GAME_SCHEDULED',
 				gameDate: '1/1',
+				teamInfo: '',
 			},
 		]);
 	}

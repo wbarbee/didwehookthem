@@ -22,6 +22,7 @@ const config: Config = {
 				'fade-in': 'fadeIn 0.65s ease-out',
 				'pulse-opacity': 'pulse 5s infinite',
 				spin: 'spin 2s linear infinite',
+				'slide-in-left': 'slideInLeft 0.65s ease-out forwards',
 			},
 			fontFamily: {
 				playfair: ['Playfair Display', 'serif'],
@@ -44,6 +45,16 @@ const config: Config = {
 					},
 					'100%': {
 						opacity: '1',
+					},
+				},
+				slideInLeft: {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-50px)',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)',
 					},
 				},
 			},

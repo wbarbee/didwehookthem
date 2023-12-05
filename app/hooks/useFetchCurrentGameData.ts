@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Game, FormattedGameData } from '../types';
 
-const endpoint =
+const scoreboardEndpoint =
 	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard';
+const teamEndpoint =
+	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/texas';
 
 const useFetchCurrentGameData = () => {
 	const [formattedData, setFormattedData] = useState<FormattedGameData | null>(
@@ -17,31 +19,42 @@ const useFetchCurrentGameData = () => {
 
 		const fetchData = async (startDate: string, endDate: string) => {
 			try {
-				const response = await fetch(
-					`${endpoint}?dates=${startDate}-${endDate}&limit=500`,
-					{
-						method: 'GET',
-						cache: 'no-cache',
-					}
+				const responseScoreboard = await fetch(
+					`${scoreboardEndpoint}?dates=${startDate}-${endDate}&limit=500`,
+					{ method: 'GET', cache: 'no-cache' }
 				);
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
+				if (!responseScoreboard.ok) {
+					throw new Error('Network response was not ok for scoreboard');
 				}
-				const json = await response.json();
-				const longhornsData = extractTexasLonghornsData(json);
+				const jsonScoreboard = await responseScoreboard.json();
+
+				const responseTeam = await fetch(teamEndpoint, {
+					method: 'GET',
+					cache: 'no-cache',
+				});
+				if (!responseTeam.ok) {
+					throw new Error('Network response was not ok for team info');
+				}
+				const jsonTeam = await responseTeam.json();
+
+				const longhornsData = extractTexasLonghornsData(jsonScoreboard);
 				if (longhornsData) {
-					setFormattedData(formatGameData(longhornsData));
-					setTimeout(() => {
-						setLoading(false);
-					}, 1200);
+					const combinedData = formatGameData(longhornsData);
+					console.log(combinedData);
+					combinedData.teamInfo = jsonTeam.team;
+
+					setFormattedData(combinedData);
 				} else {
 					throw new Error('No data found');
 				}
 			} catch (error) {
 				if (!signal.aborted) {
 					console.error(error);
+					setError(error as Error);
 					return false;
 				}
+			} finally {
+				setLoading(false);
 			}
 			return true;
 		};
@@ -55,10 +68,6 @@ const useFetchCurrentGameData = () => {
 			if (!success) {
 				await fetchData(previousWeeksDate, currentDate);
 			}
-
-			setTimeout(() => {
-				setLoading(false);
-			}, 1200);
 		};
 
 		tryFetchData();

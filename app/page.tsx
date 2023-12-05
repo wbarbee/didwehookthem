@@ -3,6 +3,7 @@ import useFetchCurrentGameData from './hooks/useFetchCurrentGameData';
 import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
+import NextEventSlider from './components/NextEventSlider';
 
 const Home = () => {
 	const { data, loading, error } = useFetchCurrentGameData();
@@ -33,6 +34,7 @@ const Home = () => {
 
 	return (
 		<section className='flex flex-col justify-center align-center w-full h-screen min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
+			<NextEventSlider nextGameData={data.teamInfo?.nextEvent[0] || ''} />
 			{data.gameStatus === 'Final' && (
 				<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[45rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 					<h1

@@ -19,6 +19,12 @@ export interface GameStatsProps {
 	venueStadium: string;
 }
 
+interface TeamInfo {
+	teamName: string;
+	teamStats: any;
+	nextEvent: any;
+}
+
 export interface FormattedGameData {
 	gameStatus?: string;
 	homeTeam?: string;
@@ -27,6 +33,7 @@ export interface FormattedGameData {
 	awayTeamScore?: string;
 	venueCity?: string;
 	venueStadium?: string;
+	teamInfo?: TeamInfo;
 }
 
 interface Venue {
@@ -112,4 +119,5 @@ export interface FormattedScheduleGameData {
 	teamName: string;
 	gameStatus: string;
 	gameDate: string;
+	teamInfo: any;
 }
