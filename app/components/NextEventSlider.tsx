@@ -18,9 +18,9 @@ const NextEventSlider: React.FC<INextEventSliderProps> = ({ nextGameData }) => {
 		return null;
 	} else {
 		return (
-			<div className='next-event-slider-wrapper fixed left-2 selection:md:left-3 bottom-3 bg-blue-900 dark:bg-blue-900 px-0 pt-0 pb-4 text-xs md:text-sm rounded-md text-white font-gothic font-light text-center animate-slide-in-left delay-300'>
+			<div className='next-event-slider-wrapper fixed left-2 selection:md:left-3 bottom-3 bg-blue-900 dark:bg-gray-900 px-0 pt-0 pb-4 text-xs md:text-sm rounded-md text-white font-gothic font-light text-center animate-slide-in-left delay-300'>
 				<h2
-					className={`font-semibold dark:bg-white dark:text-burntOrange w-full mx-auto mb-2 pt-1 pb-1 px-0 mt-0 rounded-t-md text-xs ${oxanium.className}`}>
+					className={`font-semibold dark:bg-gray-800 text-white dark:text-burntOrange w-full mx-auto dark:mb-2 pt-2 dark:pt-1 pb-1 px-0 mt-0 rounded-t-md text-xs ${oxanium.className}`}>
 					UP NEXT:
 				</h2>
 				<div className='px-4'>
