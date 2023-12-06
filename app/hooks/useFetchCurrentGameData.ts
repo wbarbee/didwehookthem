@@ -85,7 +85,9 @@ const useFetchCurrentGameData = () => {
 				}
 			} finally {
 				if (!signal.aborted) {
-					setLoading(false);
+					setTimeout(() => {
+						setLoading(false);
+					}, 1000);
 				}
 			}
 			return true;
@@ -104,7 +106,9 @@ const useFetchCurrentGameData = () => {
 				setError(error as Error);
 			})
 			.finally(() => {
-				setLoading(false);
+				setTimeout(() => {
+					setLoading(false);
+				}, 1000);
 			});
 
 		return () => {
