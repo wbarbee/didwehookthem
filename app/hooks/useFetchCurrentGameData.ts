@@ -13,35 +13,60 @@ const useFetchCurrentGameData = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
 
+	const [refetchIndex, setRefetchIndex] = useState(0);
+
+	const refetch = () => {
+		setRefetchIndex((prevIndex) => prevIndex + 1);
+	};
+
 	useEffect(() => {
+		setLoading(true);
+		setError(null);
 		const abortController = new AbortController();
 		const { signal } = abortController;
 
-		const fetchData = async (startDate: string, endDate: string) => {
-			try {
-				const responseScoreboard = await fetch(
-					`${scoreboardEndpoint}?dates=${startDate}-${endDate}&limit=500`,
-					{ method: 'GET', cache: 'no-cache' }
-				);
-				if (!responseScoreboard.ok) {
-					throw new Error('Network response was not ok for scoreboard');
-				}
-				const jsonScoreboard = await responseScoreboard.json();
-
-				const responseTeam = await fetch(teamEndpoint, {
+		const fetchScoreboard = async (startDate: string, endDate: string) => {
+			const response = await fetch(
+				`${scoreboardEndpoint}?dates=${startDate}-${endDate}&limit=500`,
+				{
 					method: 'GET',
 					cache: 'no-cache',
-				});
-				if (!responseTeam.ok) {
-					throw new Error('Network response was not ok for team info');
+					signal,
 				}
-				const jsonTeam = await responseTeam.json();
+			);
+			if (!response.ok) {
+				console.error('Error status:', response.status);
+				const errorResponse = await response.text();
+				console.error('Error details:', errorResponse);
+				throw new Error(`Server error: ${response.status}`);
+			}
+			return response.json();
+		};
+
+		const fetchTeam = async () => {
+			const response = await fetch(teamEndpoint, {
+				method: 'GET',
+				cache: 'no-cache',
+				signal,
+			});
+			if (!response.ok) {
+				console.error('Error status:', response.status);
+				const errorResponse = await response.text();
+				console.error('Error details:', errorResponse);
+				throw new Error(`Server error: ${response.status}`);
+			}
+			return response.json();
+		};
+
+		const tryFetchData = async (startDate: string, endDate: string) => {
+			try {
+				const jsonScoreboard = await fetchScoreboard(startDate, endDate);
+				const jsonTeam = await fetchTeam();
 
 				const longhornsData = extractTexasLonghornsData(jsonScoreboard);
 				if (longhornsData) {
 					const combinedData = formatGameData(longhornsData);
 					combinedData.teamInfo = jsonTeam.team;
-
 					setFormattedData(combinedData);
 				} else {
 					throw new Error('No data found');
@@ -50,33 +75,36 @@ const useFetchCurrentGameData = () => {
 				if (!signal.aborted) {
 					console.error(error);
 					setError(error as Error);
-					return false;
 				}
 			} finally {
+				if (!signal.aborted) {
+					setLoading(false);
+				}
+			}
+		};
+
+		const lastWeekDate = getDateString(-3);
+		const previousWeeksDate = getDateString(-7);
+		const currentDate = getDateString(0);
+
+		tryFetchData(lastWeekDate, currentDate)
+			.then(() => {
+				tryFetchData(previousWeeksDate, currentDate);
+			})
+			.catch((error) => {
+				console.error('Error in fetching data:', error);
+				setError(error as Error);
+			})
+			.finally(() => {
 				setLoading(false);
-			}
-			return true;
-		};
-
-		const tryFetchData = async () => {
-			const lastWeekDate = getDateString(-3);
-			const previousWeeksDate = getDateString(-7);
-			const currentDate = getDateString(0);
-
-			const success = await fetchData(lastWeekDate, currentDate);
-			if (!success) {
-				await fetchData(previousWeeksDate, currentDate);
-			}
-		};
-
-		tryFetchData();
+			});
 
 		return () => {
 			abortController.abort();
 		};
-	}, []);
+	}, [refetchIndex]);
 
-	return { data: formattedData, loading, error };
+	return { data: formattedData, loading, error, refetch };
 };
 
 export default useFetchCurrentGameData;

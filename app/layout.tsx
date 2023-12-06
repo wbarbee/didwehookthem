@@ -21,7 +21,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={`${bodyClasses}`}>
 				<Nav />
-				{children}
+				<div className='min-h-screen'>{children}</div>
 				<Analytics />
 				<Footer />
 			</body>

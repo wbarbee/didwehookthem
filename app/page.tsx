@@ -8,11 +8,9 @@ import NextEventSlider from './components/NextEventSlider';
 const Home = () => {
 	const { data, loading, error } = useFetchCurrentGameData();
 
-	console.log(data, 'data');
-
 	if (loading) return <Loading />;
 
-	if (error) return <ErrorMsg />;
+	// if (error) return <ErrorMsg />;
 
 	if (!data) return null;
 
