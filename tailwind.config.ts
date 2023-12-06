@@ -23,6 +23,7 @@ const config: Config = {
 				'pulse-opacity': 'pulse 5s infinite',
 				spin: 'spin 2s linear infinite',
 				'slide-in-left': 'slideInLeft 0.65s ease-out forwards',
+				'slide-in-right': 'slideInRight 0.65s ease-out forwards',
 			},
 			fontFamily: {
 				playfair: ['Playfair Display', 'serif'],
@@ -51,6 +52,16 @@ const config: Config = {
 					'0%': {
 						opacity: '0',
 						transform: 'translateX(-50px)',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)',
+					},
+				},
+				slideInRight: {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(50px)',
 					},
 					'100%': {
 						opacity: '1',
