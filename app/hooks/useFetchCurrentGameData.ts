@@ -40,7 +40,6 @@ const useFetchCurrentGameData = () => {
 				const longhornsData = extractTexasLonghornsData(jsonScoreboard);
 				if (longhornsData) {
 					const combinedData = formatGameData(longhornsData);
-					console.log(combinedData);
 					combinedData.teamInfo = jsonTeam.team;
 
 					setFormattedData(combinedData);
