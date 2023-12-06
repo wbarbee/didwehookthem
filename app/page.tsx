@@ -10,7 +10,7 @@ const Home = () => {
 
 	if (loading) return <Loading />;
 
-	// if (error) return <ErrorMsg />;
+	if (error) return <ErrorMsg />;
 
 	if (!data) return null;
 

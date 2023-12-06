@@ -35,10 +35,10 @@ const useFetchCurrentGameData = () => {
 				}
 			);
 			if (!response.ok) {
-				console.error('Error status:', response.status);
+				console.error('SCORE Error status:', response.status);
 				const errorResponse = await response.text();
-				console.error('Error details:', errorResponse);
-				throw new Error(`Server error: ${response.status}`);
+				console.error('SCORE Error details:', errorResponse);
+				throw new Error(`SCORE Server error: ${response.status}`);
 			}
 			return response.json();
 		};
@@ -50,10 +50,10 @@ const useFetchCurrentGameData = () => {
 				signal,
 			});
 			if (!response.ok) {
-				console.error('Error status:', response.status);
+				console.error('TEAM Error status:', response.status);
 				const errorResponse = await response.text();
-				console.error('Error details:', errorResponse);
-				throw new Error(`Server error: ${response.status}`);
+				console.error('TEAM Error details:', errorResponse);
+				throw new Error(`TEAM Server error: ${response.status}`);
 			}
 			return response.json();
 		};
@@ -61,6 +61,13 @@ const useFetchCurrentGameData = () => {
 		const tryFetchData = async (startDate: string, endDate: string) => {
 			try {
 				const jsonScoreboard = await fetchScoreboard(startDate, endDate);
+				console.log('Raw Scoreboard Data:', jsonScoreboard); // Debugging
+
+				if (jsonScoreboard.events.length === 0) {
+					console.warn('No events found in the data');
+					return false;
+				}
+
 				const jsonTeam = await fetchTeam();
 
 				const longhornsData = extractTexasLonghornsData(jsonScoreboard);
@@ -69,7 +76,7 @@ const useFetchCurrentGameData = () => {
 					combinedData.teamInfo = jsonTeam.team;
 					setFormattedData(combinedData);
 				} else {
-					throw new Error('No data found');
+					console.warn('No Texas Longhorns game found in the data');
 				}
 			} catch (error) {
 				if (!signal.aborted) {
@@ -81,6 +88,7 @@ const useFetchCurrentGameData = () => {
 					setLoading(false);
 				}
 			}
+			return true;
 		};
 
 		const lastWeekDate = getDateString(-3);
