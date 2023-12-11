@@ -7,7 +7,7 @@ import weHookedThem from './utils/weHookedThem';
 import { FormattedGameData } from './types';
 
 interface GameDataProps {
-	data: FormattedGameData | null;
+	data: FormattedGameData;
 	loading: boolean;
 	error: any;
 }
