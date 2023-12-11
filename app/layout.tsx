@@ -1,12 +1,11 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Footer from './components/Footer';
 import Nav from './nav';
 import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import Home from './page';
-import { FormattedGameData } from './types';
 
 const bodyClasses =
 	'dark:bg-gray-950 bg-white font-graduate w-full h-full min-h-screen ';
