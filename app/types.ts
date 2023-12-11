@@ -26,6 +26,8 @@ export interface FormattedGameData {
 	weHookedThem?: boolean;
 }
 
+export type FormattedGameDataOrArray = FormattedGameData | FormattedGameData[];
+
 export interface GameData {
 	teamName: string;
 	score: number | null;
@@ -138,6 +140,7 @@ interface ScheduleStatus {
 
 export interface ScheduleEvent {
 	competitions: ScheduleCompetition[];
+	gameStatus: string;
 	seasonType: {
 		name: string;
 	};

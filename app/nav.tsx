@@ -11,6 +11,8 @@ const oxanium = Oxanium({
 const Nav: React.FC<NavProps> = ({ data, loading, error }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+	console.log('HERE: ', data);
+
 	useEffect(() => {
 		const handleOutsideClick = (event: any) => {
 			if (isMenuOpen && !event.target.closest('.nav-main')) {
