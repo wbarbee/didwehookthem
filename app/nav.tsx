@@ -1,26 +1,14 @@
-'use client';
 import React, { useState, useEffect } from 'react';
-import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
+import { FormattedGameData, NavProps } from './types';
 import { Oxanium } from 'next/font/google';
-
-interface GameData {
-	teamName: string;
-	score: number | null;
-	gameStatus: string;
-	gameDate: string;
-}
+import weHookedThem from './utils/weHookedThem';
 
 const oxanium = Oxanium({
 	weight: '500',
 	subsets: ['latin'],
 });
 
-const Nav = () => {
-	const {
-		data: navData,
-		loading: navLoading,
-		error: navError,
-	} = useFetchLonghornsSchedule();
+const Nav: React.FC<NavProps> = ({ data, loading, error }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	useEffect(() => {
@@ -39,53 +27,17 @@ const Nav = () => {
 		};
 	}, [isMenuOpen]);
 
-	if (navLoading || navError || !navData) return null;
+	if (loading || error || !data) return null;
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
-	// manully add in bowl game if not available
-	if (navData.length === 13) {
-		navData.push([
-			{
-				score: 0,
-				teamName: 'TEX',
-				gameStatus: 'CHAMP_GAME_SCHEDULED',
-				gameDate: '1/1',
-				teamInfo: '',
-			},
-			{
-				score: 0,
-				teamName: 'WU',
-				gameStatus: 'CHAMP_GAME_SCHEDULED',
-				gameDate: '1/1',
-				teamInfo: '',
-			},
-		]);
-	}
-
-	const weHookedThem = (gameData: GameData[]) => {
-		const texasTeam = gameData.find((team) => team.teamName === 'TEX');
-		const opponentTeam = gameData.find((team) => team.teamName !== 'TEX');
+	const isGameScoreFinal = (gameData: FormattedGameData) => {
 		return (
-			texasTeam?.score &&
-			opponentTeam?.score &&
-			texasTeam.score > opponentTeam.score
-		);
-	};
-
-	const isNeutralTerritory = (gameData: GameData[]) => {
-		return (
-			['OU', 'OKST', 'WU'].includes(gameData[0].teamName) ||
-			['OU', 'OKST', 'WU'].includes(gameData[1].teamName)
-		);
-	};
-
-	const isGameScoreFinal = (gameData: GameData[]) => {
-		return (
-			gameData[0].gameStatus === 'STATUS_FINAL' ||
-			gameData[0].gameStatus === 'Final'
+			gameData.gameStatus === 'STATUS_FINAL' ||
+			gameData.gameStatus === 'Final' ||
+			gameData.gameStatus === 'CHAMP_FINAL'
 		);
 	};
 
@@ -112,34 +64,34 @@ const Nav = () => {
 				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[19.5rem] w-full'>
 					<div className='caret border-color-[#d1d5dc]'></div>
 					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-md w-full z-10 pt-3 pb-1 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[17.5rem] md:max-w-[19rem]'>
-						{navData.map((gameData: GameData[], index: number) => (
+						{data.map((gameData: FormattedGameData, index: number) => (
 							<React.Fragment key={index}>
-								{gameData.length >= 2 && (
+								{gameData && (
 									<ul className='py-0'>
 										{isGameScoreFinal(gameData) && (
 											<li className={navItemStyles}>
 												<span className='mr-2'>
 													{weHookedThem(gameData) ? '✅' : '❌'}
 												</span>
-												<span className='mr-2'>[{gameData[0].gameDate}]</span>
+												<span className='mr-2'>[{gameData.gameDate}]</span>
 												<span
 													className={
-														gameData[1].teamName === 'TEX'
+														gameData.team1Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData[1].teamName} <b>{gameData[1].score}</b>
+													{gameData.team1Name} <b>{gameData.team1Score}</b>
 												</span>
 												<span className='mx-2'>
-													{isNeutralTerritory(gameData) ? 'VS.' : '@'}
+													{gameData.neutralSite ? 'VS.' : '@'}
 												</span>
 												<span
 													className={
-														gameData[0].teamName === 'TEX'
+														gameData.team2Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData[0].teamName} <b>{gameData[0].score}</b>
+													{gameData.team2Name} <b>{gameData.team2Score}</b>
 												</span>
 												<span className='mx-2'>--</span>
 												<span
@@ -161,32 +113,32 @@ const Nav = () => {
 										{!isGameScoreFinal(gameData) && (
 											<li className={navItemStyles}>
 												<span className='mr-3'>
-													{gameData[0].gameStatus === 'STATUS_SCHEDULED'
+													{gameData.gameStatus === 'STATUS_SCHEDULED'
 														? '🗓️'
-														: gameData[0].gameStatus === 'CHAMP_GAME_SCHEDULED'
+														: gameData.gameStatus === 'CHAMP_GAME_SCHEDULED'
 														? '🏆'
 														: '⏳'}
 												</span>
 												<span
 													className={
-														gameData[1].teamName === 'TEX'
+														gameData.team1Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData[1].teamName}{' '}
-													<b>{gameData[1].score || ''}</b>
+													{gameData.team1Name}{' '}
+													<b>{gameData.team1Score || ''}</b>
 												</span>
 												<span className='mx-2'>
-													{isNeutralTerritory(gameData) ? 'VS.' : '@'}
+													{gameData.neutralSite ? 'VS.' : '@'}
 												</span>
 												<span
 													className={
-														gameData[0].teamName === 'TEX'
+														gameData.team2Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData[0].teamName}{' '}
-													<b>{gameData[0].score || ''}</b>
+													{gameData.team2Name}{' '}
+													<b>{gameData.team2Score || ''}</b>
 												</span>
 												<span className='mx-2'>--</span>
 												<span className='text-gray-500 dark:text-gray-400'>

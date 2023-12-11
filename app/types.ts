@@ -8,32 +8,42 @@ export interface Game {
 	competitions: Competition[];
 }
 
-export interface GameStatsProps {
-	homeTeam: string;
-	homeTeamScore: string;
-	awayTeam: string;
+export interface GameData {
+	teamName: string;
+	score: number | null;
 	gameStatus: string;
-	awayTeamScore: string;
-	weHookedThem: boolean;
-	venueCity: string;
-	venueStadium: string;
+	gameDate: string;
+	teamInfo?: string;
 }
 
-interface TeamInfo {
-	teamName: string;
-	teamStats: any;
-	nextEvent: any;
+export interface NavProps {
+	data: FormattedGameData[] | null;
+	loading: boolean;
+	error: any;
+}
+
+export interface GameDataProps {
+	data: FormattedGameData[] | FormattedGameData | null;
+	loading: boolean;
+	error: any;
 }
 
 export interface FormattedGameData {
-	gameStatus?: string;
-	homeTeam?: string;
-	homeTeamScore?: string;
-	awayTeam?: string;
-	awayTeamScore?: string;
-	venueCity?: string;
-	venueStadium?: string;
-	teamInfo?: TeamInfo;
+	team1Name: string;
+	team1Score: string | null;
+	team2Name: string;
+	team2Score: string | null;
+	gameStatus: string;
+	gameDate: string;
+	seasonType: string;
+	neutralSite: boolean;
+	venueCity: string;
+	venueState: string;
+	venueStadium: string;
+	gamePeriod: number;
+	gameClockDisplay: string;
+	gameHeadline: string;
+	weHookedThem?: boolean;
 }
 
 interface Venue {
@@ -102,9 +112,25 @@ interface ScheduleCompetition {
 	competitors: ScheduleCompetitor[];
 	status: ScheduleStatus;
 	date?: string;
+	neutralSite: boolean;
+	notes: {
+		type: string;
+		headline: string;
+	};
+	venue: {
+		address: {
+			city: string;
+			state: string;
+			zipCode: string;
+		};
+		fullName: string;
+	};
 }
 
 interface ScheduleStatus {
+	clock: number;
+	displayClock: string;
+	period: number;
 	type: {
 		name: string;
 	};
@@ -112,12 +138,21 @@ interface ScheduleStatus {
 
 export interface ScheduleEvent {
 	competitions: ScheduleCompetition[];
+	seasonType: {
+		name: string;
+	};
 }
 
 export interface FormattedScheduleGameData {
-	score: number | null;
-	teamName: string;
+	team1Name: string;
+	team1Score: number | null;
+	team2Name: string;
+	team2Score: number | null;
 	gameStatus: string;
 	gameDate: string;
-	teamInfo: any;
+	seasonType: string;
+	neutralSite: boolean;
+	venueCity: string;
+	venueState: string;
+	venueStadium: string;
 }
