@@ -8,6 +8,24 @@ export interface Game {
 	competitions: Competition[];
 }
 
+export interface FormattedGameData {
+	team1Name: string;
+	team1Score: string | number | null;
+	team2Name: string;
+	team2Score: string | number | null;
+	gameStatus: string;
+	gameDate: string;
+	seasonType: string;
+	neutralSite: boolean;
+	venueCity: string;
+	venueState: string;
+	venueStadium: string;
+	gamePeriod: number | null;
+	gameClockDisplay: string;
+	gameHeadline: string;
+	weHookedThem?: boolean;
+}
+
 export interface GameData {
 	teamName: string;
 	score: number | null;
@@ -26,24 +44,6 @@ export interface GameDataProps {
 	data: FormattedGameData | null;
 	loading: boolean;
 	error: any;
-}
-
-export interface FormattedGameData {
-	team1Name: string;
-	team1Score: string | null;
-	team2Name: string;
-	team2Score: string | null;
-	gameStatus: string;
-	gameDate: string;
-	seasonType: string;
-	neutralSite: boolean;
-	venueCity: string;
-	venueState: string;
-	venueStadium: string;
-	gamePeriod: number;
-	gameClockDisplay: string;
-	gameHeadline: string;
-	weHookedThem?: boolean;
 }
 
 interface Venue {
@@ -141,18 +141,4 @@ export interface ScheduleEvent {
 	seasonType: {
 		name: string;
 	};
-}
-
-export interface FormattedScheduleGameData {
-	team1Name: string;
-	team1Score: number | null;
-	team2Name: string;
-	team2Score: number | null;
-	gameStatus: string;
-	gameDate: string;
-	seasonType: string;
-	neutralSite: boolean;
-	venueCity: string;
-	venueState: string;
-	venueStadium: string;
 }

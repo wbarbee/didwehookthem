@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ScheduleEvent, FormattedScheduleGameData } from '../types';
+import { ScheduleEvent, FormattedGameData } from '../types';
 
 const endpoint =
 	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/texas/schedule';
 
 const useFetchCurrentGameData = () => {
 	const [formattedData, setFormattedData] = useState<
-		FormattedScheduleGameData[] | null
+		FormattedGameData[] | null
 	>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
@@ -51,8 +51,7 @@ const useFetchCurrentGameData = () => {
 
 export default useFetchCurrentGameData;
 
-function formatGameData(events: ScheduleEvent[]): FormattedScheduleGameData[] {
-	console.log('EVENTS: ', events);
+function formatGameData(events: ScheduleEvent[]): FormattedGameData[] {
 	return events.map((event) => {
 		const gameStatus = event.competitions[0].status.type.name ?? '';
 		const gameDate = new Date(event.competitions[0].date ?? '');
