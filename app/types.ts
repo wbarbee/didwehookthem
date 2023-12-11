@@ -23,7 +23,7 @@ export interface NavProps {
 }
 
 export interface GameDataProps {
-	data: FormattedGameData[] | FormattedGameData | null;
+	data: FormattedGameData | null;
 	loading: boolean;
 	error: any;
 }
