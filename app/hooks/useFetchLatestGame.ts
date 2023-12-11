@@ -76,8 +76,6 @@ function createFormattedGameDataFromEvent(
 	const competitor1 = event.competitions[0].competitors[0];
 	const competitor2 = event.competitions[0].competitors[1];
 
-	console.log('HERE WE ARE HERE: ', gameStatus);
-
 	return createFormattedGameData(
 		competitor1,
 		competitor2,

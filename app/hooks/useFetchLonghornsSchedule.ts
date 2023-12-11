@@ -65,7 +65,6 @@ export default useFetchCurrentGameData;
 function createFormattedGameDataFromEvent(
 	event: ScheduledEvent
 ): FormattedGameData {
-	console.log(event);
 	const gameStatus = event.competitions[0].status.type.name ?? '';
 	const gameDate = new Date(event.competitions[0].date ?? '');
 	const seasonType = event.seasonType.name;

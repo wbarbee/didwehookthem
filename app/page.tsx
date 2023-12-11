@@ -30,6 +30,13 @@ const Home = () => {
 
 	const gameData = currentGameData || data;
 
+	const currentDate = new Date();
+	const gameDate = new Date(gameData.gameDate);
+	const isToday =
+		currentDate.getDate() === gameDate.getDate() &&
+		currentDate.getMonth() === gameDate.getMonth() &&
+		currentDate.getFullYear() === gameDate.getFullYear();
+
 	return (
 		<div className='flex flex-col justify-center align-center w-full h-screen md:min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[35rem] md:max-w-[45rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
@@ -54,7 +61,7 @@ const Home = () => {
 				{gameData.gameStatus !== 'STATUS_FINAL' && (
 					<>
 						<h1 className='text-[6.5cqw] md:text-[3rem] lg:text-[3.25rem] text-burntOrange font-graduate leading-[2.2rem] md:leading-[3.4rem]'>
-							{gameData.gameStatus === 'Scheduled' ? (
+							{isToday ? (
 								<>
 									<div>
 										Game Day: <br />
@@ -62,7 +69,12 @@ const Home = () => {
 									</div>
 								</>
 							) : (
-								'UPCOMING:'
+								<>
+									<div>
+										Upcoming: <br />
+										Will we hook them?
+									</div>
+								</>
 							)}
 						</h1>
 						<div className='mt-[1rem] mb-[2rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[15rem] mx-auto animate-pulse-opacity'>

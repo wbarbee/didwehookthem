@@ -44,10 +44,6 @@ const Nav = () => {
 		);
 	};
 
-	data.map((gameData: FormattedGameData, index: number) => {
-		console.log(gameData);
-	});
-
 	const navItemStyles = `px-4 pb-1 block text-black font-light mb-2 text-[12px] md:text-[14px] ${oxanium.className} dark:text-gray-300`;
 
 	return (
