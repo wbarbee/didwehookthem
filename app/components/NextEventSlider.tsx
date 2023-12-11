@@ -1,20 +1,28 @@
+'use client';
+import useFetchLonghornsSchedule from '../hooks/useFetchLonghornsSchedule';
 import { Oxanium } from 'next/font/google';
-
-export interface INextEventSliderProps {
-	nextGameData: {
-		date: string;
-		shortName: string;
-		competitions: any;
-	};
-}
+import { FormattedGameData } from '../types';
 
 const oxanium = Oxanium({
 	weight: '500',
 	subsets: ['latin'],
 });
 
-const NextEventSlider: React.FC<INextEventSliderProps> = ({ nextGameData }) => {
-	if (!nextGameData) {
+const NextEventSlider = () => {
+	const { data } = useFetchLonghornsSchedule();
+
+	const today = new Date();
+
+	const upcomingGameData: FormattedGameData | undefined = data
+		?.filter((game) => game.gameStatus === 'STATUS_FINAL')
+		.filter((game) => new Date(game.gameDate) > today)
+		.sort(
+			(a, b) => new Date(a.gameDate).getTime() - new Date(b.gameDate).getTime()
+		)[0];
+
+	console.log('Next Scheduled Game:', upcomingGameData);
+
+	if (!upcomingGameData) {
 		return null;
 	} else {
 		return (
@@ -24,15 +32,15 @@ const NextEventSlider: React.FC<INextEventSliderProps> = ({ nextGameData }) => {
 					UP NEXT:
 				</h2>
 				<div className='px-4'>
-					<h2 className='font-semibold'>{nextGameData.shortName}</h2>
-					<h2>
-						{nextGameData.competitions[0].type.text} [
-						{nextGameData.competitions[0].status.type.shortDetail}]
+					<h2 className='font-semibold'>
+						{upcomingGameData?.team2Name}{' '}
+						{upcomingGameData?.neutralSite ? 'vs.' : '@'}{' '}
+						{upcomingGameData?.team1Name}
 					</h2>
+					<h3>{upcomingGameData?.gameDate}</h3>
 					<h3>
-						{nextGameData.competitions[0].venue.fullName} [
-						{nextGameData.competitions[0].venue.address.city},{' '}
-						{nextGameData.competitions[0].venue.address.state}]
+						{upcomingGameData?.venueStadium} [{upcomingGameData?.venueCity},{' '}
+						{upcomingGameData?.venueState}]
 					</h3>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { FormattedGameData, NavProps } from './types';
+import { FormattedGameData } from './types';
 import { Oxanium } from 'next/font/google';
 import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import weHookedThem from './utils/weHookedThem';

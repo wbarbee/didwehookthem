@@ -10,6 +10,8 @@ const useFetchCurrentGameData = () => {
 	>(null);
 	const [mostRecentGameData, setMostRecentGameData] =
 		useState<FormattedGameData | null>(null);
+	const [upcomingGameData, setUpcomingGameData] =
+		useState<FormattedGameData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
 
@@ -49,7 +51,13 @@ const useFetchCurrentGameData = () => {
 		};
 	}, []);
 
-	return { data: formattedData, mostRecentGameData, loading, error };
+	return {
+		data: formattedData,
+		mostRecentGameData,
+		upcomingGameData,
+		loading,
+		error,
+	};
 };
 
 export default useFetchCurrentGameData;

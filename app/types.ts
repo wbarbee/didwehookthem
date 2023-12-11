@@ -25,12 +25,6 @@ export interface GameData {
 	teamInfo?: string;
 }
 
-export interface NavProps {
-	data: FormattedGameData[] | null;
-	loading: boolean;
-	error: any;
-}
-
 interface ScheduleTeam {
 	displayName?: string;
 	abbreviation?: string;
@@ -60,6 +54,9 @@ interface ScheduleCompetition {
 			zipCode: string;
 		};
 		fullName: string;
+	};
+	type?: {
+		text: string;
 	};
 }
 
