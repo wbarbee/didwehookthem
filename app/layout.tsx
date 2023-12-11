@@ -18,8 +18,9 @@ export default function RootLayout({
 }) {
 	const { data, loading, error } = useFetchLonghornsSchedule();
 
-	const mostCurrentGame =
-		data?.filter((game) => game.gameStatus === 'STATUS_FINAL').pop() || null;
+	const mostCurrentGame: FormattedGameData | null = Array.isArray(data)
+		? data.find((game) => game.gameStatus === 'STATUS_FINAL') || null
+		: null;
 
 	return (
 		<html lang='en'>
