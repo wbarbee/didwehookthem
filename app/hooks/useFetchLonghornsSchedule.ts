@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ScheduleEvent, FormattedGameData } from '../types';
-
-const endpoint =
-	'https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/texas/schedule';
+import constants from '../utils/constants';
 
 const useFetchCurrentGameData = () => {
 	const [formattedData, setFormattedData] = useState<
@@ -21,7 +19,7 @@ const useFetchCurrentGameData = () => {
 
 		const fetchData = async () => {
 			try {
-				const response = await fetch(endpoint);
+				const response = await fetch(constants.apiEndpoint);
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
 				}
@@ -62,73 +60,52 @@ const useFetchCurrentGameData = () => {
 
 export default useFetchCurrentGameData;
 
-function formatGameData(events: ScheduleEvent[]): FormattedGameData[] {
-	return events.map((event) => {
-		const gameStatus = event.competitions[0].status.type.name ?? '';
-		const gameDate = new Date(event.competitions[0].date ?? '');
-		const seasonType = event.seasonType.name;
-		const neutralSite = event.competitions[0].neutralSite;
-		const venueCity = event.competitions[0].venue.address.city;
-		const venueState = event.competitions[0].venue.address.state;
-		const venueStadium = event.competitions[0].venue.fullName;
-		const gamePeriod = event.competitions[0].status.period;
-		const gameClockDisplay = event.competitions[0].status.displayClock;
-		const gameHeadline = event.competitions[0].notes.headline;
+function createFormattedGameDataFromEvent(
+	event: ScheduleEvent
+): FormattedGameData {
+	const gameStatus = event.competitions[0].status.type.name ?? '';
+	const gameDate = new Date(event.competitions[0].date ?? '');
+	const seasonType = event.seasonType.name;
+	const neutralSite = event.competitions[0].neutralSite;
+	const venueCity = event.competitions[0].venue.address.city;
+	const venueState = event.competitions[0].venue.address.state;
+	const venueStadium = event.competitions[0].venue.fullName;
+	const gamePeriod = event.competitions[0].status.period;
+	const gameClockDisplay = event.competitions[0].status.displayClock;
+	const gameHeadline = event.competitions[0].notes.headline;
+	const competitor1 = event.competitions[0].competitors[0];
+	const competitor2 = event.competitions[0].competitors[1];
 
-		const competitors = event.competitions[0].competitors;
-		return createFormattedGameData(
-			competitors[0],
-			competitors[1],
-			gameStatus,
-			gameDate,
-			seasonType,
-			neutralSite,
-			venueCity,
-			venueState,
-			venueStadium,
-			gamePeriod,
-			gameClockDisplay,
-			gameHeadline
-		);
-	});
+	return createFormattedGameData(
+		competitor1,
+		competitor2,
+		gameStatus,
+		gameDate,
+		seasonType,
+		neutralSite,
+		venueCity,
+		venueState,
+		venueStadium,
+		gamePeriod,
+		gameClockDisplay,
+		gameHeadline
+	);
+}
+
+function formatGameData(events: ScheduleEvent[]): FormattedGameData[] {
+	return events.map(createFormattedGameDataFromEvent);
 }
 
 function lastAvailableGameData(
 	events: ScheduleEvent[]
 ): FormattedGameData | null {
-	const filteredEvents = events.filter(
-		(game) => game.competitions[0].status.type.name === 'STATUS_FINAL'
-	);
-	const event = filteredEvents.pop();
-	if (event) {
-		const gameStatus = event.competitions[0].status.type.name ?? '';
-		const gameDate = new Date(event.competitions[0].date ?? '');
-		const seasonType = event.seasonType.name;
-		const neutralSite = event.competitions[0].neutralSite;
-		const venueCity = event.competitions[0].venue.address.city;
-		const venueState = event.competitions[0].venue.address.state;
-		const venueStadium = event.competitions[0].venue.fullName;
-		const gamePeriod = event.competitions[0].status.period;
-		const gameClockDisplay = event.competitions[0].status.displayClock;
-		const gameHeadline = event.competitions[0].notes.headline;
+	const lastEvent = events
+		.filter(
+			(event) => event.competitions[0].status.type.name === 'STATUS_FINAL'
+		)
+		.pop();
 
-		const competitors = event.competitions[0].competitors;
-		return createFormattedGameData(
-			competitors[0],
-			competitors[1],
-			gameStatus,
-			gameDate,
-			seasonType,
-			neutralSite,
-			venueCity,
-			venueState,
-			venueStadium,
-			gamePeriod,
-			gameClockDisplay,
-			gameHeadline
-		);
-	}
-	return null;
+	return lastEvent ? createFormattedGameDataFromEvent(lastEvent) : null;
 }
 
 function createFormattedGameData(

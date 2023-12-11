@@ -20,8 +20,6 @@ const NextEventSlider = () => {
 			(a, b) => new Date(a.gameDate).getTime() - new Date(b.gameDate).getTime()
 		)[0];
 
-	console.log('Next Scheduled Game:', upcomingGameData);
-
 	if (!upcomingGameData) {
 		return null;
 	} else {

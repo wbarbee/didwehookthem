@@ -17,30 +17,34 @@ export interface FormattedGameData {
 	weHookedThem?: boolean;
 }
 
-export interface GameData {
-	teamName: string;
-	score: number | null;
+export interface ScheduleEvent {
+	competitions: ScheduleCompetition[];
 	gameStatus: string;
-	gameDate: string;
-	teamInfo?: string;
+	seasonType: {
+		name: string;
+	};
 }
-
-interface ScheduleTeam {
-	displayName?: string;
-	abbreviation?: string;
-}
-
 interface ScheduleCompetitor {
 	score?: {
 		value: number | null;
 	};
-	team?: ScheduleTeam;
+	team?: {
+		displayName?: string;
+		abbreviation?: string;
+	};
 	date: string;
 }
 
 interface ScheduleCompetition {
 	competitors: ScheduleCompetitor[];
-	status: ScheduleStatus;
+	status: {
+		clock: number;
+		displayClock: string;
+		period: number;
+		type: {
+			name: string;
+		};
+	};
 	date?: string;
 	neutralSite: boolean;
 	notes: {
@@ -57,22 +61,5 @@ interface ScheduleCompetition {
 	};
 	type?: {
 		text: string;
-	};
-}
-
-interface ScheduleStatus {
-	clock: number;
-	displayClock: string;
-	period: number;
-	type: {
-		name: string;
-	};
-}
-
-export interface ScheduleEvent {
-	competitions: ScheduleCompetition[];
-	gameStatus: string;
-	seasonType: {
-		name: string;
 	};
 }
