@@ -15,10 +15,11 @@ const GameStats: React.FC<FormattedGameData> = ({ ...gameData }) => (
 		}`}>
 		<h2
 			className={`scoreboard font-bold text-3xl md:text-4xl font-oxanium tracking-wider dark:text-gray-400 text-gray-800 ${orbitron.className}`}>
-			{gameData.team2Score} - {gameData.team1Score}
+			{gameData.team1Score} - {gameData.team2Score}
 		</h2>
 		<h3 className='pt-1 md:pt-3 pb-1 text-sm md:text-lg font-semibold tracking-10 font-gothic dark:text-gray-400 text-gray-700'>
-			{gameData.team2Name} @ {gameData.team1Name}
+			{gameData.team1Name} {gameData.neutralSite ? 'vs.' : '@'}{' '}
+			{gameData.team2Name}
 		</h3>
 		<h3 className='text-sm md:text-lg dark:text-gray-400 font-gothic text-gray-700'>
 			<b>{gameData.venueStadium}</b> [{gameData.venueCity},{' '}

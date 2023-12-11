@@ -66,7 +66,7 @@ const Nav = () => {
 			{isMenuOpen && (
 				<div className='dropdown-wrapper relative ml-4 max-w-[95%] md:max-w-[19.5rem] w-full'>
 					<div className='caret border-color-[#d1d5dc]'></div>
-					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-md w-full z-10 pt-3 pb-1 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[17.5rem] md:max-w-[19.5rem]'>
+					<div className='absolute -left-[1rem] md:left-1 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-md w-full z-10 pt-3 pb-1 px-1 md:px-2 mt-4 transition-all ease-in-out duration-400 max-w-[18rem] md:max-w-[19.5rem]'>
 						{data.map((gameData: FormattedGameData, index: number) => (
 							<React.Fragment key={index}>
 								{gameData && (
@@ -81,22 +81,22 @@ const Nav = () => {
 												</span>
 												<span
 													className={
-														gameData.team1Name === 'TEX'
+														gameData.team2Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData.team1Name} <b>{gameData.team1Score}</b>
+													{gameData.team2Name} <b>{gameData.team2Score}</b>
 												</span>
 												<span className='mx-2'>
 													{gameData.neutralSite ? 'VS.' : '@'}
 												</span>
 												<span
 													className={
-														gameData.team2Name === 'TEX'
+														gameData.team1Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
-													{gameData.team2Name} <b>{gameData.team2Score}</b>
+													{gameData.team1Name} <b>{gameData.team1Score}</b>
 												</span>
 												<span className='mx-2'>--</span>
 												<span
@@ -126,24 +126,24 @@ const Nav = () => {
 												</span>
 												<span
 													className={
-														gameData.team1Name === 'TEX'
-															? 'font-bold text-burntOrange'
-															: 'font-light'
-													}>
-													{gameData.team1Name}{' '}
-													<b>{gameData.team1Score || ''}</b>
-												</span>
-												<span className='mx-2'>
-													{gameData.neutralSite ? 'VS.' : '@'}
-												</span>
-												<span
-													className={
 														gameData.team2Name === 'TEX'
 															? 'font-bold text-burntOrange'
 															: 'font-light'
 													}>
 													{gameData.team2Name}{' '}
 													<b>{gameData.team2Score || ''}</b>
+												</span>
+												<span className='mx-2'>
+													{gameData.neutralSite ? 'VS.' : '@'}
+												</span>
+												<span
+													className={
+														gameData.team1Name === 'TEX'
+															? 'font-bold text-burntOrange'
+															: 'font-light'
+													}>
+													{gameData.team1Name}{' '}
+													<b>{gameData.team1Score || ''}</b>
 												</span>
 												<span className='mx-2'>--</span>
 												<span className='text-gray-500 dark:text-gray-400'>
