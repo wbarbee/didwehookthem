@@ -3,7 +3,6 @@ import React from 'react';
 import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
-// import NextEventSlider from './components/NextEventSlider';
 import { GameDataProps, FormattedGameData } from './types';
 import weHookedThem from './utils/weHookedThem';
 
@@ -35,9 +34,6 @@ const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 
 	return (
 		<div className='flex flex-col justify-center align-center w-full h-screen md:min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
-			{/* <NextEventSlider
-				nextGameData={mostCurrentGame.teamInfo?.nextEvent[0] || ''}
-			/> */}
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[35rem] md:max-w-[45rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
 				{mostCurrentGame.gameStatus === 'STATUS_FINAL' && (
 					<>
