@@ -1,13 +1,3 @@
-export interface Game {
-	id: string;
-	uid: string;
-	date: string;
-	name: string;
-	shortName: string;
-	status: CompetitionStatus;
-	competitions: Competition[];
-}
-
 export interface FormattedGameData {
 	team1Name: string;
 	team1Score: string | number | null;
@@ -26,8 +16,6 @@ export interface FormattedGameData {
 	weHookedThem?: boolean;
 }
 
-export type FormattedGameDataOrArray = FormattedGameData | FormattedGameData[];
-
 export interface GameData {
 	teamName: string;
 	score: number | null;
@@ -40,61 +28,6 @@ export interface NavProps {
 	data: FormattedGameData[] | null;
 	loading: boolean;
 	error: any;
-}
-
-export interface GameDataProps {
-	data: FormattedGameData | null;
-	loading: boolean;
-	error: any;
-}
-
-interface Venue {
-	address: {
-		city: string;
-		state: string;
-	};
-	fullName: string;
-}
-
-interface Team {
-	displayName: string;
-	abbreviation?: string;
-}
-
-interface CompetitionStatus {
-	clock: number;
-	displayClock: string;
-	period: number;
-	type: {
-		id: string;
-		name: string;
-		state: string;
-		completed: boolean;
-		description: string;
-		detail: string;
-		shortDetail: string;
-	};
-}
-
-interface Competitor {
-	team: Team;
-	score: string;
-}
-
-interface Competition {
-	id: string;
-	uid: string;
-	date: string;
-	attendance: number;
-	timeValid: boolean;
-	neutralSite: boolean;
-	competitors: Competitor[];
-	conferenceCompetition: boolean;
-	playByPlayAvailable: boolean;
-	recent: boolean;
-	status: CompetitionStatus;
-	startDate: string;
-	venue: Venue;
 }
 
 interface ScheduleTeam {

@@ -3,8 +3,14 @@ import React from 'react';
 import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
-import { GameDataProps } from './types';
 import weHookedThem from './utils/weHookedThem';
+import { FormattedGameData } from './types';
+
+interface GameDataProps {
+	data: FormattedGameData | null;
+	loading: boolean;
+	error: any;
+}
 
 const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 	if (loading) return <Loading />;
