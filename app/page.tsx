@@ -7,13 +7,11 @@ import weHookedThem from './utils/weHookedThem';
 import constants from './utils/constants';
 import { FormattedGameData } from './types';
 
-interface GameDataProps {
+const Home: React.FC<{
 	data?: FormattedGameData | null;
 	loading?: boolean;
 	error?: any;
-}
-
-const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
+}> = ({ data, loading, error }) => {
 	if (loading) return <Loading />;
 	if (error) return <ErrorMsg />;
 
