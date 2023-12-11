@@ -32,7 +32,7 @@ export default function RootLayout({
 				<Analytics />
 				<div className='min-h-screen'>
 					<Home
-						data={mostCurrentGame as unknown as FormattedGameData}
+						data={mostCurrentGame as FormattedGameData}
 						loading={loading}
 						error={error}
 					/>
