@@ -21,7 +21,11 @@ const GameStats: React.FC<FormattedGameData> = ({ ...gameData }) => (
 			{gameData.team2Name} @ {gameData.team1Name}
 		</h3>
 		<h3 className='text-sm md:text-lg dark:text-gray-400 font-gothic text-gray-700'>
-			<b>{gameData.venueStadium}</b> [{gameData.venueCity}]
+			<b>{gameData.venueStadium}</b> [{gameData.venueCity},{' '}
+			{gameData.venueState}]
+		</h3>
+		<h3 className='text-sm md:text-lg dark:text-gray-400 font-gothic text-gray-700'>
+			<b>{gameData.gameDate}</b>
 		</h3>
 	</div>
 );

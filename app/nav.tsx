@@ -11,8 +11,6 @@ const oxanium = Oxanium({
 const Nav: React.FC<NavProps> = ({ data, loading, error }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-	console.log('HERE: ', data);
-
 	useEffect(() => {
 		const handleOutsideClick = (event: any) => {
 			if (isMenuOpen && !event.target.closest('.nav-main')) {
@@ -75,7 +73,9 @@ const Nav: React.FC<NavProps> = ({ data, loading, error }) => {
 												<span className='mr-2'>
 													{weHookedThem(gameData) ? '✅' : '❌'}
 												</span>
-												<span className='mr-2'>[{gameData.gameDate}]</span>
+												<span className='mr-2'>
+													[{gameData.formattedGameDate}]
+												</span>
 												<span
 													className={
 														gameData.team1Name === 'TEX'

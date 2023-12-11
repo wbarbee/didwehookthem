@@ -5,6 +5,7 @@ export interface FormattedGameData {
 	team2Score: string | number | null;
 	gameStatus: string;
 	gameDate: string;
+	formattedGameDate: string;
 	seasonType: string;
 	neutralSite: boolean;
 	venueCity: string;

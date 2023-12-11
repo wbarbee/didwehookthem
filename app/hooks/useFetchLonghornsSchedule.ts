@@ -58,7 +58,6 @@ function formatGameData(events: ScheduleEvent[]): FormattedGameData[] {
 	return events.map((event) => {
 		const gameStatus = event.competitions[0].status.type.name ?? '';
 		const gameDate = new Date(event.competitions[0].date ?? '');
-		const formattedDate = `${gameDate.getMonth() + 1}/${gameDate.getDate()}`;
 		const seasonType = event.seasonType.name;
 		const neutralSite = event.competitions[0].neutralSite;
 		const venueCity = event.competitions[0].venue.address.city;
@@ -69,13 +68,11 @@ function formatGameData(events: ScheduleEvent[]): FormattedGameData[] {
 		const gameHeadline = event.competitions[0].notes.headline;
 
 		const competitors = event.competitions[0].competitors;
-		return {
-			team1Name: competitors[0]?.team?.abbreviation ?? '',
-			team1Score: competitors[0]?.score?.value ?? null,
-			team2Name: competitors[1]?.team?.abbreviation ?? '',
-			team2Score: competitors[1]?.score?.value ?? null,
+		return createFormattedGameData(
+			competitors[0],
+			competitors[1],
 			gameStatus,
-			gameDate: formattedDate,
+			gameDate,
 			seasonType,
 			neutralSite,
 			venueCity,
@@ -83,8 +80,8 @@ function formatGameData(events: ScheduleEvent[]): FormattedGameData[] {
 			venueStadium,
 			gamePeriod,
 			gameClockDisplay,
-			gameHeadline,
-		};
+			gameHeadline
+		);
 	});
 }
 
@@ -98,7 +95,6 @@ function lastAvailableGameData(
 	if (event) {
 		const gameStatus = event.competitions[0].status.type.name ?? '';
 		const gameDate = new Date(event.competitions[0].date ?? '');
-		const formattedDate = `${gameDate.getMonth() + 1}/${gameDate.getDate()}`;
 		const seasonType = event.seasonType.name;
 		const neutralSite = event.competitions[0].neutralSite;
 		const venueCity = event.competitions[0].venue.address.city;
@@ -109,13 +105,11 @@ function lastAvailableGameData(
 		const gameHeadline = event.competitions[0].notes.headline;
 
 		const competitors = event.competitions[0].competitors;
-		return {
-			team1Name: competitors[0]?.team?.abbreviation ?? '',
-			team1Score: competitors[0]?.score?.value ?? null,
-			team2Name: competitors[1]?.team?.abbreviation ?? '',
-			team2Score: competitors[1]?.score?.value ?? null,
+		return createFormattedGameData(
+			competitors[0],
+			competitors[1],
 			gameStatus,
-			gameDate: formattedDate,
+			gameDate,
 			seasonType,
 			neutralSite,
 			venueCity,
@@ -123,8 +117,49 @@ function lastAvailableGameData(
 			venueStadium,
 			gamePeriod,
 			gameClockDisplay,
-			gameHeadline,
-		};
+			gameHeadline
+		);
 	}
 	return null;
+}
+
+function createFormattedGameData(
+	competitor1: any,
+	competitor2: any,
+	gameStatus: string,
+	gameDate: Date,
+	seasonType: string,
+	neutralSite: boolean,
+	venueCity: string,
+	venueState: string,
+	venueStadium: string,
+	gamePeriod: number,
+	gameClockDisplay: string,
+	gameHeadline: string
+): FormattedGameData {
+	return {
+		team1Name: competitor1?.team?.abbreviation ?? '',
+		team1Score: competitor1?.score?.value ?? null,
+		team2Name: competitor2?.team?.abbreviation ?? '',
+		team2Score: competitor2?.score?.value ?? null,
+		gameStatus,
+		gameDate:
+			`${gameDate.getMonth() + 1}`.padStart(2, '0') +
+			'/' +
+			`${gameDate.getDate()}`.padStart(2, '0') +
+			'/' +
+			gameDate.getFullYear(),
+		formattedGameDate:
+			`${gameDate.getMonth() + 1}`.padStart(2, '0') +
+			'/' +
+			`${gameDate.getDate()}`.padStart(2, '0'),
+		seasonType,
+		neutralSite,
+		venueCity,
+		venueState,
+		venueStadium,
+		gamePeriod,
+		gameClockDisplay,
+		gameHeadline,
+	};
 }

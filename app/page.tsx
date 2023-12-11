@@ -4,10 +4,11 @@ import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
 import weHookedThem from './utils/weHookedThem';
+import constants from './utils/constants';
 import { FormattedGameData } from './types';
 
 interface GameDataProps {
-	data?: FormattedGameData;
+	data?: FormattedGameData | null;
 	loading?: boolean;
 	error?: any;
 }
@@ -23,11 +24,6 @@ const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 			window.location.reload();
 		}
 	};
-
-	const refreshSrc =
-		'https://ik.imagekit.io/mefqellzto/misc/refresh_7D_Gnmjk3.svg?updatedAt=1700495470983';
-	const darkRefreshSrc =
-		'https://ik.imagekit.io/mefqellzto/misc/refresh-dark-mode_9GNAmZqHg.png?updatedAt=1700511360761';
 
 	return (
 		<div className='flex flex-col justify-center align-center w-full h-screen md:min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
@@ -76,10 +72,10 @@ const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 					<span className='text-xs'>Refresh</span>
 					<picture className='inline-block w-[0.85rem] ml-2 align-middle'>
 						<source
-							srcSet={darkRefreshSrc}
+							srcSet={constants.darkRefreshSrc}
 							media='(prefers-color-scheme: dark)'
 						/>
-						<img src={refreshSrc} alt='Refresh Icon' />
+						<img src={constants.refreshSrc} alt='Refresh Icon' />
 					</picture>
 				</button>
 			</p>
