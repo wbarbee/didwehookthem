@@ -54,7 +54,7 @@ export default useFetchCurrentGameData;
 function formatGameData(events: ScheduleEvent[]): FormattedScheduleGameData[] {
 	console.log('EVENTS: ', events);
 	return events.map((event) => {
-		const gameStatus = event.competitions[0].status.type.name;
+		const gameStatus = event.competitions[0].status.type.name ?? '';
 		const gameDate = new Date(event.competitions[0].date ?? '');
 		const formattedDate = `${gameDate.getMonth() + 1}/${gameDate.getDate()}`;
 		const seasonType = event.seasonType.name;

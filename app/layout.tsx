@@ -18,6 +18,9 @@ export default function RootLayout({
 }) {
 	const { data, loading, error } = useFetchLonghornsSchedule();
 
+	const mostCurrentGame =
+		data?.filter((game) => game.gameStatus === 'STATUS_FINAL').pop() || null;
+
 	return (
 		<html lang='en'>
 			<body className={`${bodyClasses}`}>
@@ -29,7 +32,7 @@ export default function RootLayout({
 				<Analytics />
 				<div className='min-h-screen'>
 					<Home
-						data={data as unknown as FormattedGameData}
+						data={mostCurrentGame as unknown as FormattedGameData}
 						loading={loading}
 						error={error}
 					/>

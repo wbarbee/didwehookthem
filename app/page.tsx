@@ -3,23 +3,14 @@ import React from 'react';
 import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
-import { GameDataProps, FormattedGameData } from './types';
+import { GameDataProps } from './types';
 import weHookedThem from './utils/weHookedThem';
 
 const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 	if (loading) return <Loading />;
 	if (error) return <ErrorMsg />;
 
-	let mostCurrentGame: FormattedGameData | null = null;
-
-	if (Array.isArray(data)) {
-		mostCurrentGame =
-			data.filter((game) => game.gameStatus === 'STATUS_FINAL').pop() || null;
-	} else if (data && data.gameStatus === 'STATUS_FINAL') {
-		mostCurrentGame = data;
-	}
-
-	if (!mostCurrentGame) return null;
+	if (!data) return null;
 
 	const handleRefreshClick = () => {
 		if (typeof window !== 'undefined') {
@@ -35,30 +26,26 @@ const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 	return (
 		<div className='flex flex-col justify-center align-center w-full h-screen md:min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[35rem] md:max-w-[45rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
-				{mostCurrentGame.gameStatus === 'STATUS_FINAL' && (
+				{data.gameStatus === 'STATUS_FINAL' && (
 					<>
 						<h1
 							className={`text-[2.75rem] md:text-[4rem] text-burntOrange ${
-								weHookedThem(mostCurrentGame)
-									? 'text-burntOrange'
-									: 'text-red-500'
+								weHookedThem(data) ? 'text-burntOrange' : 'text-red-500'
 							}`}>
-							{weHookedThem(mostCurrentGame)
-								? 'We hooked them.'
-								: 'Did not hook them.'}
+							{weHookedThem(data) ? 'We hooked them.' : 'Did not hook them.'}
 						</h1>
 						<div
 							className={`mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[20rem] mx-auto animate-fade-in ${
-								weHookedThem(mostCurrentGame) ? 'rotate-0' : 'rotate-180'
+								weHookedThem(data) ? 'rotate-0' : 'rotate-180'
 							}`}>
 							<span className='text-7xl'>🤘</span>
 						</div>
 					</>
 				)}
-				{mostCurrentGame.gameStatus !== 'STATUS_FINAL' && (
+				{data.gameStatus !== 'STATUS_FINAL' && (
 					<>
 						<h1 className='text-[6.5cqw] md:text-[3rem] lg:text-[3.25rem] text-burntOrange font-graduate leading-[2.2rem] md:leading-[3.4rem]'>
-							{mostCurrentGame.gameStatus === 'Scheduled' ? (
+							{data.gameStatus === 'Scheduled' ? (
 								<>
 									<div>
 										Game Day: <br />
@@ -74,7 +61,7 @@ const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
 						</div>
 					</>
 				)}
-				<GameStats {...mostCurrentGame} />
+				<GameStats {...data} />
 			</div>
 			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-2'>
 				<button
