@@ -13,11 +13,13 @@ const GameStats: React.FC<FormattedGameData> = ({ ...gameData }) => (
 				? 'border-red-500 text-red-500'
 				: 'border-burntOrange text-black dark:text-white'
 		}`}>
-		<h2
-			className={`scoreboard font-bold text-3xl md:text-4xl font-oxanium tracking-wider dark:text-gray-400 text-gray-800 ${orbitron.className}`}>
-			{gameData.team1Score} - {gameData.team2Score}
-		</h2>
-		<h3 className='pt-1 md:pt-3 pb-1 text-sm md:text-lg font-semibold tracking-10 font-gothic dark:text-gray-400 text-gray-700'>
+		{gameData.team1Score === 0 && gameData.team2Score === 0 && (
+			<h2
+				className={`scoreboard font-bold text-3xl md:text-4xl font-oxanium tracking-wider dark:text-gray-400 text-gray-800 pb-1 md:pb-3  ${orbitron.className}`}>
+				{gameData.team1Score} - {gameData.team2Score}
+			</h2>
+		)}
+		<h3 className='pb-1 text-sm md:text-lg font-semibold tracking-10 font-gothic dark:text-gray-400 text-gray-700'>
 			{gameData.team1Name} {gameData.neutralSite ? 'vs.' : '@'}{' '}
 			{gameData.team2Name}
 		</h3>

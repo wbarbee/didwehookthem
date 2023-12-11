@@ -17,7 +17,7 @@ export interface FormattedGameData {
 	weHookedThem?: boolean;
 }
 
-export interface ScheduleEvent {
+export interface ScheduledEvent {
 	competitions: ScheduleCompetition[];
 	gameStatus: string;
 	seasonType: {
@@ -47,10 +47,7 @@ interface ScheduleCompetition {
 	};
 	date?: string;
 	neutralSite: boolean;
-	notes: {
-		type: string;
-		headline: string;
-	};
+	notes?: NotesProps[];
 	venue: {
 		address: {
 			city: string;
@@ -63,3 +60,8 @@ interface ScheduleCompetition {
 		text: string;
 	};
 }
+
+type NotesProps = {
+	type: string;
+	headline: string;
+};

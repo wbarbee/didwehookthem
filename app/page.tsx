@@ -6,6 +6,7 @@ import ErrorMsg from './components/ErrorMsg';
 import weHookedThem from './utils/weHookedThem';
 import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import constants from './utils/constants';
+import useFetchLatestGame from './hooks/useFetchLatestGame';
 
 const Home = () => {
 	const {
@@ -13,6 +14,8 @@ const Home = () => {
 		loading,
 		error,
 	} = useFetchLonghornsSchedule();
+
+	const { currentGameData } = useFetchLatestGame();
 
 	if (loading) return <Loading />;
 	if (error) return <ErrorMsg />;
@@ -25,29 +28,33 @@ const Home = () => {
 		}
 	};
 
+	const gameData = currentGameData || data;
+
 	return (
 		<div className='flex flex-col justify-center align-center w-full h-screen md:min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[35rem] md:max-w-[45rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
-				{data.gameStatus === 'STATUS_FINAL' && (
+				{gameData.gameStatus === 'STATUS_FINAL' && (
 					<>
 						<h1
 							className={`text-[2.75rem] md:text-[4rem] text-burntOrange ${
-								weHookedThem(data) ? 'text-burntOrange' : 'text-red-500'
+								weHookedThem(gameData) ? 'text-burntOrange' : 'text-red-500'
 							}`}>
-							{weHookedThem(data) ? 'We hooked them.' : 'Did not hook them.'}
+							{weHookedThem(gameData)
+								? 'We hooked them.'
+								: 'Did not hook them.'}
 						</h1>
 						<div
 							className={`mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[20rem] mx-auto animate-fade-in ${
-								weHookedThem(data) ? 'rotate-0' : 'rotate-180'
+								weHookedThem(gameData) ? 'rotate-0' : 'rotate-180'
 							}`}>
 							<span className='text-7xl'>🤘</span>
 						</div>
 					</>
 				)}
-				{data.gameStatus !== 'STATUS_FINAL' && (
+				{gameData.gameStatus !== 'STATUS_FINAL' && (
 					<>
 						<h1 className='text-[6.5cqw] md:text-[3rem] lg:text-[3.25rem] text-burntOrange font-graduate leading-[2.2rem] md:leading-[3.4rem]'>
-							{data.gameStatus === 'Scheduled' ? (
+							{gameData.gameStatus === 'Scheduled' ? (
 								<>
 									<div>
 										Game Day: <br />
@@ -55,7 +62,7 @@ const Home = () => {
 									</div>
 								</>
 							) : (
-								'Currently trying to hook them.'
+								'UPCOMING:'
 							)}
 						</h1>
 						<div className='mt-[1rem] mb-[2rem] md:mt-[2rem] md:mb-[2.5rem] w-[95%] max-w-[15rem] mx-auto animate-pulse-opacity'>
@@ -63,7 +70,7 @@ const Home = () => {
 						</div>
 					</>
 				)}
-				<GameStats {...data} />
+				<GameStats {...gameData} />
 			</div>
 			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-2'>
 				<button

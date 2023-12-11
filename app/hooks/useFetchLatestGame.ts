@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
-import { ScheduledEvent, FormattedGameData } from '../types';
 import constants from '../utils/constants';
+import { FormattedGameData, ScheduledEvent } from '../types';
 
-const useFetchCurrentGameData = () => {
-	const [formattedData, setFormattedData] = useState<
-		FormattedGameData[] | null
-	>(null);
-	const [mostRecentGameData, setMostRecentGameData] =
-		useState<FormattedGameData | null>(null);
-	const [upcomingGameData, setUpcomingGameData] =
-		useState<FormattedGameData | null>(null);
+const useFetchLatestGame = () => {
+	const [formattedData, setFormattedData] = useState<FormattedGameData | null>(
+		null
+	);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
+	const endpoint = constants.apiFetchSingleGameEndpoint;
+
+	const isTexasLonghornsGame = (event: ScheduledEvent): boolean => {
+		return event.competitions.some((competition: any) =>
+			competition.competitors.some((competitor: any) =>
+				competitor.team?.displayName?.includes('Texas Longhorns')
+			)
+		);
+	};
 
 	useEffect(() => {
 		const abortController = new AbortController();
@@ -19,28 +24,24 @@ const useFetchCurrentGameData = () => {
 
 		const fetchData = async () => {
 			try {
-				const response = await fetch(constants.apiFetchFullScheduleEndpoint, {
-					signal,
-				});
+				const response = await fetch(endpoint, { signal });
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
 				}
 				const json = await response.json();
 				const events = json.events;
-				if (events) {
-					setFormattedData(formatGameData(events));
-					setMostRecentGameData(lastAvailableGameData(events));
+				const nextChanceToHookThem = events.filter(isTexasLonghornsGame);
+				if (nextChanceToHookThem) {
+					setFormattedData(fetchUpcomingGameData(nextChanceToHookThem));
 				} else {
-					throw new Error('No events found');
+					throw new Error('No NEXT events found');
 				}
 			} catch (error) {
 				if (!signal.aborted) {
 					setError(error as Error);
 				}
 			} finally {
-				setTimeout(() => {
-					setLoading(false);
-				}, 1200);
+				setLoading(false);
 			}
 		};
 
@@ -51,24 +52,17 @@ const useFetchCurrentGameData = () => {
 		};
 	}, []);
 
-	return {
-		data: formattedData,
-		mostRecentGameData,
-		upcomingGameData,
-		loading,
-		error,
-	};
+	return { currentGameData: formattedData, loading, error };
 };
 
-export default useFetchCurrentGameData;
+export default useFetchLatestGame;
 
 function createFormattedGameDataFromEvent(
 	event: ScheduledEvent
 ): FormattedGameData {
-	console.log(event);
 	const gameStatus = event.competitions[0].status.type.name ?? '';
 	const gameDate = new Date(event.competitions[0].date ?? '');
-	const seasonType = event.seasonType.name;
+	const seasonType = event.competitions[0].status.type.name;
 	const neutralSite = event.competitions[0].neutralSite;
 	const venueCity = event.competitions[0].venue.address.city;
 	const venueState = event.competitions[0].venue.address.state;
@@ -82,6 +76,8 @@ function createFormattedGameDataFromEvent(
 	const competitor1 = event.competitions[0].competitors[0];
 	const competitor2 = event.competitions[0].competitors[1];
 
+	console.log('HERE WE ARE HERE: ', gameStatus);
+
 	return createFormattedGameData(
 		competitor1,
 		competitor2,
@@ -94,24 +90,24 @@ function createFormattedGameDataFromEvent(
 		venueStadium,
 		gamePeriod,
 		gameClockDisplay,
-		gameHeadline
+		gameHeadline?.toUpperCase() ?? ''
 	);
 }
 
-function formatGameData(events: ScheduledEvent[]): FormattedGameData[] {
-	return events.map(createFormattedGameDataFromEvent);
-}
-
-function lastAvailableGameData(
+function fetchUpcomingGameData(
 	events: ScheduledEvent[]
 ): FormattedGameData | null {
-	const lastEvent = events
-		.filter(
-			(event) => event.competitions[0].status.type.name === 'STATUS_FINAL'
+	const nextEvent = events
+		.filter((event) =>
+			event.competitions.some((competition: any) =>
+				competition.competitors.some((competitor: any) =>
+					competitor.team?.displayName?.includes('Texas Longhorns')
+				)
+			)
 		)
-		.pop();
+		.shift();
 
-	return lastEvent ? createFormattedGameDataFromEvent(lastEvent) : null;
+	return nextEvent ? createFormattedGameDataFromEvent(nextEvent) : null;
 }
 
 function createFormattedGameData(
@@ -126,13 +122,13 @@ function createFormattedGameData(
 	venueStadium: string,
 	gamePeriod: number,
 	gameClockDisplay: string,
-	gameHeadline: any
+	gameHeadline: string
 ): FormattedGameData {
 	return {
 		team1Name: competitor1?.team?.abbreviation ?? '',
-		team1Score: competitor1?.score?.value ?? null,
+		team1Score: competitor1?.score?.value ?? '0',
 		team2Name: competitor2?.team?.abbreviation ?? '',
-		team2Score: competitor2?.score?.value ?? null,
+		team2Score: competitor2?.score?.value ?? '0',
 		gameStatus,
 		gameDate:
 			`${gameDate.getMonth() + 1}`.padStart(2, '0') +

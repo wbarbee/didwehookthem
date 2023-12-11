@@ -44,6 +44,10 @@ const Nav = () => {
 		);
 	};
 
+	data.map((gameData: FormattedGameData, index: number) => {
+		console.log(gameData);
+	});
+
 	const navItemStyles = `px-4 pb-1 block text-black font-light mb-2 text-[12px] md:text-[14px] ${oxanium.className} dark:text-gray-300`;
 
 	return (
@@ -74,7 +78,13 @@ const Nav = () => {
 										{isGameScoreFinal(gameData) && (
 											<li className={navItemStyles}>
 												<span className='mr-2'>
-													{weHookedThem(gameData) ? '✅' : '❌'}
+													{weHookedThem(gameData)
+														? gameData.gameHeadline &&
+														  (gameData.gameHeadline.includes('Playoffs') ||
+																gameData.gameHeadline.includes('Championship'))
+															? '🏆'
+															: '✅'
+														: '❌'}
 												</span>
 												<span className='mr-2'>
 													[{gameData.formattedGameDate}]
@@ -120,7 +130,7 @@ const Nav = () => {
 												<span className='mr-3'>
 													{gameData.gameStatus === 'STATUS_SCHEDULED'
 														? '🗓️'
-														: gameData.gameStatus === 'CHAMP_GAME_SCHEDULED'
+														: gameData.gameHeadline.includes('Championship')
 														? '🏆'
 														: '⏳'}
 												</span>
