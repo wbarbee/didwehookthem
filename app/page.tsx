@@ -7,9 +7,9 @@ import weHookedThem from './utils/weHookedThem';
 import { FormattedGameData } from './types';
 
 interface GameDataProps {
-	data: FormattedGameData;
-	loading: boolean;
-	error: any;
+	data?: FormattedGameData;
+	loading?: boolean;
+	error?: any;
 }
 
 const Home: React.FC<GameDataProps> = ({ data, loading, error }) => {
