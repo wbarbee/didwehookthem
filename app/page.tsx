@@ -4,14 +4,16 @@ import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
 import weHookedThem from './utils/weHookedThem';
+import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import constants from './utils/constants';
-import { FormattedGameData } from './types';
 
-const Home: React.FC<{
-	data?: FormattedGameData | null | undefined;
-	loading?: boolean;
-	error?: any;
-}> = ({ data, loading, error }) => {
+const Home = () => {
+	const {
+		mostRecentGameData: data,
+		loading,
+		error,
+	} = useFetchLonghornsSchedule();
+
 	if (loading) return <Loading />;
 	if (error) return <ErrorMsg />;
 

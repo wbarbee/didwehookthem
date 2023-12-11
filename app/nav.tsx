@@ -1,6 +1,8 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { FormattedGameData, NavProps } from './types';
 import { Oxanium } from 'next/font/google';
+import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import weHookedThem from './utils/weHookedThem';
 
 const oxanium = Oxanium({
@@ -8,7 +10,8 @@ const oxanium = Oxanium({
 	subsets: ['latin'],
 });
 
-const Nav: React.FC<NavProps> = ({ data, loading, error }) => {
+const Nav = () => {
+	const { data, loading, error } = useFetchLonghornsSchedule();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	useEffect(() => {
