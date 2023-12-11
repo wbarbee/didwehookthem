@@ -8,7 +8,7 @@ import constants from './utils/constants';
 import { FormattedGameData } from './types';
 
 const Home: React.FC<{
-	data?: FormattedGameData | null;
+	data?: FormattedGameData | null | undefined;
 	loading?: boolean;
 	error?: any;
 }> = ({ data, loading, error }) => {
