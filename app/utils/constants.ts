@@ -7,6 +7,8 @@ const constants = {
 		'https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/texas/schedule',
 	apiFetchSingleGameEndpoint:
 		'https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard',
+	apiFetchBackupInfo:
+		'http://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/texas',
 };
 
 export default constants;

@@ -7,6 +7,7 @@ import weHookedThem from './utils/weHookedThem';
 import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
 import constants from './utils/constants';
 import useFetchLatestGame from './hooks/useFetchLatestGame';
+import useFetchBackupData from './hooks/useFetchBackupData';
 
 const Home = () => {
 	const {
@@ -17,10 +18,14 @@ const Home = () => {
 
 	const { currentGameData } = useFetchLatestGame();
 
+	const { backupNextGameInfo } = useFetchBackupData();
+
 	if (loading) return <Loading />;
 	if (error) return <ErrorMsg />;
 
-	if (!data) return null;
+	if (!currentGameData && !data && !backupNextGameInfo) return null;
+
+	console.log(backupNextGameInfo);
 
 	const handleRefreshClick = () => {
 		if (typeof window !== 'undefined') {
@@ -28,7 +33,9 @@ const Home = () => {
 		}
 	};
 
-	const gameData = currentGameData || data;
+	const gameData = currentGameData || data || backupNextGameInfo;
+
+	if (!gameData) return null;
 
 	const currentDate = new Date();
 	const gameDate = new Date(gameData.gameDate);
