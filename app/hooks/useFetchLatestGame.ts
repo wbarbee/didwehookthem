@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import constants from '../utils/constants';
-import { FormattedGameData, ScheduledEvent } from '../types';
 import useFetchData from './useFetchData';
+import constants from '../utils/constants';
 import { createFormattedGameDataFromEvent } from '../utils/createFormattedGameDataFromEvent';
+import { FormattedGameData, ScheduledEvent } from '../types';
 
 const endpoint = constants.apiFetchSingleGameEndpoint;
 

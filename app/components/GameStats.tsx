@@ -1,6 +1,6 @@
 import { Orbitron } from 'next/font/google';
 import { GameStatsProps } from '../types';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const orbitron = Orbitron({
 	weight: '500',

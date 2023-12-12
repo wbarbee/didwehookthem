@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import useFetchData from './useFetchData';
-import { ScheduledEvent, FormattedGameData } from '../types';
 import { createFormattedGameDataFromEvent } from '../utils/createFormattedGameDataFromEvent';
 import constants from '../utils/constants';
+import { ScheduledEvent, FormattedGameData } from '../types';
 
 const useFetchCurrentGameData = () => {
 	const processData = useCallback((json: any): FormattedGameData[] => {

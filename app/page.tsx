@@ -3,12 +3,12 @@ import React from 'react';
 import GameStats from './components/GameStats';
 import Loading from './components/Loading';
 import ErrorMsg from './components/ErrorMsg';
-import weHookedThem from './utils/weHookedThem';
-import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
-import constants from './utils/constants';
 import useFetchLatestGame from './hooks/useFetchLatestGame';
 import useFetchBackupData from './hooks/useFetchBackupData';
 import useFetchFinalSeasonInfo from './hooks/useFetchFinalSeasonInfo';
+import weHookedThem from './utils/weHookedThem';
+import useFetchLonghornsSchedule from './hooks/useFetchLonghornsSchedule';
+import constants from './utils/constants';
 
 const Home = () => {
 	const {

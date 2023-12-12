@@ -19,7 +19,7 @@ const useFetchData = <
 			try {
 				const response = await fetch(endpoint, { signal });
 				if (!response.ok) {
-					throw new Error('Network response was not ok');
+					throw new Error('No data found');
 				}
 				const json = await response.json();
 				setFormattedData(processData(json));
