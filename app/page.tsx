@@ -11,19 +11,18 @@ import useFetchBackupData from './hooks/useFetchBackupData';
 
 const Home = () => {
 	const {
-		mostRecentGameData: data,
+		data: mostRecentGameData,
 		loading,
 		error,
 	} = useFetchLonghornsSchedule();
-
-	const { currentGameData } = useFetchLatestGame();
-
-	const { backupNextGameInfo } = useFetchBackupData();
+	const { data: currentGameData } = useFetchLatestGame();
+	const { data: backupNextGameInfo } = useFetchBackupData();
 
 	if (loading) return <Loading />;
 	if (error) return <ErrorMsg />;
 
-	if (!currentGameData && !data && !backupNextGameInfo) return null;
+	if (!currentGameData && !mostRecentGameData && !backupNextGameInfo)
+		return null;
 
 	const handleRefreshClick = () => {
 		if (typeof window !== 'undefined') {
@@ -31,12 +30,14 @@ const Home = () => {
 		}
 	};
 
-	const gameData = currentGameData || data || backupNextGameInfo;
+	const gameData = currentGameData || mostRecentGameData || backupNextGameInfo;
 
 	if (!gameData) return null;
 
 	const currentDate = new Date();
-	const gameDate = new Date(gameData.gameDate);
+	let displayGameData = Array.isArray(gameData) ? gameData[0] : gameData;
+	if (!displayGameData) return null;
+	const gameDate = new Date(displayGameData.gameDate);
 	const isToday =
 		currentDate.getDate() === gameDate.getDate() &&
 		currentDate.getMonth() === gameDate.getMonth() &&
@@ -45,25 +46,29 @@ const Home = () => {
 	return (
 		<div className='flex flex-col justify-center align-center w-full h-screen md:min-h-[45rem] py-4 relative font-graduate md:-mt-[0.5rem]'>
 			<div className='-mt-[2rem] md:mt-0 mb-2rem md:mb-0 max-w-[35rem] md:max-w-[45rem] w-[95%] mx-auto text-center pt-5 pb-8 bg-gray-200 dark:bg-gray-900 rounded-lg shadow-sm relative animate-fade-in'>
-				{gameData.gameStatus === 'STATUS_FINAL' && (
+				{displayGameData.gameStatus === 'STATUS_FINAL' && (
 					<>
 						<h1
 							className={`text-[2.75rem] md:text-[4rem] text-burntOrange ${
-								weHookedThem(gameData) ? 'text-burntOrange' : 'text-red-500'
+								weHookedThem(Array.isArray(gameData) ? gameData[0] : gameData)
+									? 'text-burntOrange'
+									: 'text-red-500'
 							}`}>
-							{weHookedThem(gameData)
+							{weHookedThem(Array.isArray(gameData) ? gameData[0] : gameData)
 								? 'We hooked them.'
 								: 'Did not hook them.'}
 						</h1>
 						<div
 							className={`mt-[1rem] mb-[2.5rem] w-[95%] max-w-[18rem] md:max-w-[20rem] mx-auto animate-fade-in ${
-								weHookedThem(gameData) ? 'rotate-0' : 'rotate-180'
+								weHookedThem(Array.isArray(gameData) ? gameData[0] : gameData)
+									? 'rotate-0'
+									: 'rotate-180'
 							}`}>
 							<span className='text-7xl'>🤘</span>
 						</div>
 					</>
 				)}
-				{gameData.gameStatus !== 'STATUS_FINAL' && (
+				{displayGameData.gameStatus !== 'STATUS_FINAL' && (
 					<>
 						<h1 className='text-[6.5cqw] md:text-[3rem] lg:text-[3.25rem] text-burntOrange font-graduate leading-[2.2rem] md:leading-[3.4rem]'>
 							{isToday ? (
@@ -87,7 +92,7 @@ const Home = () => {
 						</div>
 					</>
 				)}
-				<GameStats {...gameData} />
+				<GameStats {...(Array.isArray(gameData) ? gameData[0] : gameData)} />
 			</div>
 			<p className='fixed w-[95%] max-w-[5.5rem] bottom-3 right-2'>
 				<button

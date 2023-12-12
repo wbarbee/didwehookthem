@@ -1,58 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import constants from '../utils/constants';
 import { FormattedGameData, ScheduledEvent } from '../types';
+import useFetchData from './useFetchData';
+
+const endpoint = constants.apiFetchSingleGameEndpoint;
+
+const isTexasLonghornsGame = (event: ScheduledEvent): boolean => {
+	return event.competitions.some((competition: any) =>
+		competition.competitors.some((competitor: any) =>
+			competitor.team?.displayName?.includes('Texas Longhorns')
+		)
+	);
+};
 
 const useFetchLatestGame = () => {
-	const [formattedData, setFormattedData] = useState<FormattedGameData | null>(
-		null
-	);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<Error | null>(null);
-	const endpoint = constants.apiFetchSingleGameEndpoint;
-
-	const isTexasLonghornsGame = (event: ScheduledEvent): boolean => {
-		return event.competitions.some((competition: any) =>
-			competition.competitors.some((competitor: any) =>
-				competitor.team?.displayName?.includes('Texas Longhorns')
-			)
-		);
-	};
-
-	useEffect(() => {
-		const abortController = new AbortController();
-		const { signal } = abortController;
-
-		const fetchData = async () => {
-			try {
-				const response = await fetch(endpoint, { signal });
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				const json = await response.json();
-				const events = json.events;
-				const nextChanceToHookThem = events.filter(isTexasLonghornsGame);
-				if (nextChanceToHookThem) {
-					setFormattedData(fetchUpcomingGameData(nextChanceToHookThem));
-				} else {
-					throw new Error('No NEXT events found');
-				}
-			} catch (error) {
-				if (!signal.aborted) {
-					setError(error as Error);
-				}
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchData();
-
-		return () => {
-			abortController.abort();
-		};
+	const processData = useCallback((json: any) => {
+		const events = json.events;
+		const nextChanceToHookThem = events.filter(isTexasLonghornsGame);
+		return nextChanceToHookThem.length > 0
+			? createFormattedGameDataFromEvent(nextChanceToHookThem[0])
+			: null;
 	}, []);
 
-	return { currentGameData: formattedData, loading, error };
+	return useFetchData(endpoint, processData);
 };
 
 export default useFetchLatestGame;

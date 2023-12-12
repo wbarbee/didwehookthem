@@ -1,60 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
+import useFetchData from './useFetchData';
 import { ScheduledEvent, FormattedGameData } from '../types';
 import constants from '../utils/constants';
 
 const useFetchCurrentGameData = () => {
-	const [formattedData, setFormattedData] = useState<
-		FormattedGameData[] | null
-	>(null);
-	const [mostRecentGameData, setMostRecentGameData] =
-		useState<FormattedGameData | null>(null);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<Error | null>(null);
-
-	useEffect(() => {
-		const abortController = new AbortController();
-		const { signal } = abortController;
-
-		const fetchData = async () => {
-			try {
-				const response = await fetch(constants.apiFetchFullScheduleEndpoint, {
-					signal,
-				});
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				const json = await response.json();
-				const events = json.events;
-				if (events) {
-					setFormattedData(formatGameData(events));
-					setMostRecentGameData(lastAvailableGameData(events));
-				} else {
-					throw new Error('No events found');
-				}
-			} catch (error) {
-				if (!signal.aborted) {
-					setError(error as Error);
-				}
-			} finally {
-				setTimeout(() => {
-					setLoading(false);
-				}, 1200);
-			}
-		};
-
-		fetchData();
-
-		return () => {
-			abortController.abort();
-		};
+	const processData = useCallback((json: any): FormattedGameData[] => {
+		const events = json.events;
+		return events ? formatGameData(events) : [];
 	}, []);
 
-	return {
-		data: formattedData,
-		mostRecentGameData,
-		loading,
-		error,
-	};
+	return useFetchData(constants.apiFetchFullScheduleEndpoint, processData);
 };
 
 export default useFetchCurrentGameData;

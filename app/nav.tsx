@@ -46,6 +46,10 @@ const Nav = () => {
 
 	const navItemStyles = `px-4 pb-1 block text-black font-light mb-2 text-[12px] md:text-[14px] ${oxanium.className} dark:text-gray-300 last-of-type:mb-0`;
 
+	if (data.length <= 1) {
+		return;
+	}
+
 	return (
 		<nav className='absolute top-0 nav-main ml-3 md:ml-4 mt-4 max-w-[21rem] md:max-w-[27rem] w-full animate-fade-in'>
 			<button
