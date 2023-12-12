@@ -10,14 +10,6 @@ const useFetchBackupData = () => {
 	const [error, setError] = useState<Error | null>(null);
 	const endpoint = constants.apiFetchBackupInfo;
 
-	const isTexasLonghornsGame = (event: ScheduledEvent): boolean => {
-		return event.competitions.some((competition: any) =>
-			competition.competitors.some((competitor: any) =>
-				competitor.team?.displayName?.includes('Texas Longhorns')
-			)
-		);
-	};
-
 	useEffect(() => {
 		const abortController = new AbortController();
 		const { signal } = abortController;
