@@ -25,8 +25,6 @@ const Home = () => {
 
 	if (!currentGameData && !data && !backupNextGameInfo) return null;
 
-	console.log(backupNextGameInfo);
-
 	const handleRefreshClick = () => {
 		if (typeof window !== 'undefined') {
 			window.location.reload();
