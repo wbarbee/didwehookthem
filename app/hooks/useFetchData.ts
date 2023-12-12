@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { FormattedGameData } from '../types';
+import { FormattedGameData, TeamInfo } from '../types';
 
-const useFetchData = <T extends FormattedGameData | FormattedGameData[] | null>(
+const useFetchData = <
+	T extends FormattedGameData | FormattedGameData[] | TeamInfo | null
+>(
 	endpoint: string,
-	processData: (json: any) => T | null
+	processData: (json: any) => T
 ) => {
 	const [formattedData, setFormattedData] = useState<T | null>(null);
 	const [loading, setLoading] = useState(true);

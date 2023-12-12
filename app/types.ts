@@ -24,6 +24,20 @@ export interface ScheduledEvent {
 		name: string;
 	};
 }
+
+export interface TeamInfo {
+	standingSummary: string;
+	rank: number;
+	wins: number;
+	losses: number;
+}
+
+export interface GameStatsProps {
+	gameData: FormattedGameData;
+	teamData?: TeamInfo;
+	backupNextGameInfo: any;
+}
+
 interface ScheduleCompetitor {
 	score?: {
 		value: number | null;
